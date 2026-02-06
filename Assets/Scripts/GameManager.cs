@@ -6,12 +6,15 @@ using UnityEngine.SceneManagement; // Needed if you want to restart later
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance; // The Singleton link
+    public static GameManager instance;
+
+    public static int scoreKeeper = 0;
 
     [Header("UI Settings")]
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI missileText;
     public TextMeshProUGUI centerText;
+    public GameObject restartButton;
 
     [Header("Game Settings")]
     public int missilesToWin = 10;
@@ -32,6 +35,9 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+
+        currentScore = scoreKeeper;
+
         currentMissilesLeft = missilesToWin;
         UpdateUI();
 
@@ -80,7 +86,10 @@ public class GameManager : MonoBehaviour
         isGameActive = false;
         centerText.text = "GAME OVER";
         centerText.color = Color.red;
+        restartButton.SetActive(true);
         CancelInvoke("AddSurvivalPoints"); // Stop giving points
+
+        scoreKeeper = 0;
     }
 
     void WinGame()
@@ -88,7 +97,15 @@ public class GameManager : MonoBehaviour
         isGameActive = false;
         centerText.text = "YOU WIN PILOT";
         centerText.color = Color.green;
+        restartButton.SetActive(true);
         CancelInvoke("AddSurvivalPoints");
+        scoreKeeper = currentScore;
+    }
+
+    public void RestartGame()
+    {
+        // This reloads the current scene (resets everything)
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     void UpdateUI()
