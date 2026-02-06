@@ -24,6 +24,9 @@ public class jet_mov : MonoBehaviour
     [Header("Shooting Settings")]
     public GameObject bulletPrefab; // Drag your Bullet Prefab here
     public Transform firePoint;     // Drag your FirePoint object here
+    
+    [Header("Effects")]
+    public GameObject deathEffect; // Drag your explosion prefab here
 
     void Update()
     {
@@ -63,6 +66,31 @@ public class jet_mov : MonoBehaviour
     {
         // Spawn the bullet at the FirePoint's position and rotation
         Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+    }
+
+    // This catches "Trigger" hits (passing through objects)
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        // Check for the tag "missile" (lowercase, just like you have it)
+        if (other.CompareTag("missile") || other.name.Contains("missile"))
+        {
+            Die();
+        }
+    }
+
+    void Die()
+    {
+        GameManager.instance.GameOver();
+
+        // --- NEW CODE ---
+        // Spawn the explosion at the PLAYER'S position
+        if (deathEffect != null)
+        {
+            Instantiate(deathEffect, transform.position, Quaternion.identity);
+        }
+        // ----------------
+
+        Destroy(gameObject);
     }
 
     void LateUpdate()

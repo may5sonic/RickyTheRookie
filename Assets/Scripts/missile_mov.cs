@@ -15,7 +15,7 @@ public class missile : MonoBehaviour
      transform.Translate(Vector3.left * speed * Time.deltaTime);
 
     // destroy off screen
-    if (transform.position.x < -12f) {
+    if (transform.position.x < -15f) {
         Destroy(gameObject);
     }
 

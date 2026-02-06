@@ -135,6 +135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   speed: 20
   lifeTime: 2
+  deathEffect: {fileID: 713417785191214622, guid: e9fd406519d94d749b195a039b88e6a7, type: 3}
 --- !u!61 &4655348910812163271
 BoxCollider2D:
   m_ObjectHideFlags: 0

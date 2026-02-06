@@ -7,6 +7,9 @@ public class Bullet : MonoBehaviour
     public float speed = 20f;
     public float lifeTime = 2f; // Bullet destroys itself after 2 seconds
 
+    [Header("Effects")]
+    public GameObject deathEffect; // Drag your explosion prefab here
+
     void Start()
     {
         // 1. Destroy the bullet automatically so memory doesn't fill up
@@ -26,10 +29,18 @@ public class Bullet : MonoBehaviour
         // We check the Tag OR if the name contains "missile"
         if (hitInfo.CompareTag("missile") || hitInfo.gameObject.name.Contains("missile") || hitInfo.gameObject.name.Contains("Missile(Clone)"))
         {
-            // 1. Destroy the Enemy
+            // This part tells our GameManager the missile was destoryed
+            GameManager.instance.MissileDestroyed();
+
+            if (deathEffect != null)
+            {
+                Instantiate(deathEffect, hitInfo.transform.position, Quaternion.identity);
+            }
+
+            // Destroy the Enemy
             Destroy(hitInfo.gameObject);
             
-            // 2. Destroy the Bullet (so it doesn't keep flying)
+            // Destroy the Bullet (so it doesn't keep flying)
             Destroy(gameObject);
             
             // Optional: This is where you would play an explosion sound or spawn an effect
