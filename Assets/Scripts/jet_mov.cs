@@ -28,6 +28,18 @@ public class jet_mov : MonoBehaviour
     [Header("Effects")]
     public GameObject deathEffect; // Drag your explosion prefab here
 
+    void Start()
+    {
+        // 1. Load the saved data (Just in case we skipped the Main Menu while testing)
+        GameSettings.Load();
+
+        // 2. Overwrite the local 'speed' with the Global setting from the slider
+        speed = GameSettings.PlayerSpeed;
+        
+        // Optional Debug to prove it works in the Console
+        Debug.Log("Jet Speed set to: " + speed);
+    }
+
     void Update()
     {
 

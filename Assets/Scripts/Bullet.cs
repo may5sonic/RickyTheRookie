@@ -12,7 +12,10 @@ public class Bullet : MonoBehaviour
 
     void Start()
     {
-        // 1. Destroy the bullet automatically so memory doesn't fill up
+        //  Overwrite the Inspector speed with the Global Setting
+        speed = GameSettings.BulletSpeed;
+
+        // Destroy the bullet automatically so memory doesn't fill up
         Destroy(gameObject, lifeTime);
     }
 
