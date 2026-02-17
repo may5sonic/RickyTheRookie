@@ -29,3 +29,5 @@ public static class GameSettings
         PlayerPrefs.Save();
     }
 }
+
+// comment
