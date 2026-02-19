@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            // DontDestroyOnLoad(gameObject);
 
             // Listen for scene changes so we can set the correct state automatically
             SceneManager.sceneLoaded += OnSceneLoaded;
@@ -140,10 +140,15 @@ public class GameManager : MonoBehaviour
     // Runs every time a new scene loads
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == "MainMenu")
+        if (scene.name == "MainMenu") 
+        {
             SetState(GameState.MainMenu);
-        else if (scene.name == "Game")
+        }
+        else if (scene.name == "Game") 
+        {
+            isGameActive = true;  // makes sure missile spawner loads
             SetState(GameState.Playing);
+        }
     }
     void Update()
     {
