@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +11,9 @@ public class GameManager : MonoBehaviour
 
     public enum GameState { MainMenu, Playing, Paused, GameOver }
 
-     public GameState CurrentState { get; private set; }
+    public GameState CurrentState { get; private set; }
+
+    public static event Action<GameState> OnGameStateChanged;
 
 
     public static int scoreKeeper = 0;
@@ -130,7 +133,7 @@ public class GameManager : MonoBehaviour
     void OnDestroy()
     {
         // Clean up event subscription when object is destroyed
-        if (Instance == this)
+        if (instance == this)
             SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
@@ -163,7 +166,8 @@ public void SetState(GameState newState)
 
         OnGameStateChanged?.Invoke(newState);
     }
-public void PauseGame() => SetState(GameState.Paused);
+
+    public void PauseGame() => SetState(GameState.Paused);
     public void ResumeGame() => SetState(GameState.Playing);
 
     public void GoToMainMenu()

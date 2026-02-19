@@ -35,12 +35,12 @@ public class PauseMenuUI : MonoBehaviour
     // Called by Resume button
     public void Resume()
     {
-        GameManager.Instance.ResumeGame();
+        GameManager.instance.ResumeGame();
     }
 
     // Called by Main Menu button
     public void GoToMainMenu()
     {
-        GameManager.Instance.GoToMainMenu();
+        GameManager.instance.GoToMainMenu();
     }
 }
