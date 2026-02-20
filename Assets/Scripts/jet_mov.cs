@@ -19,7 +19,7 @@ public class jet_mov : MonoBehaviour
 
     [Header("Movement Settings")]
     public float speed = 5f;
-    public float rotationSpeed = 720f; // How fast it turns (degrees per second)
+    //public float rotationSpeed = 720f; // How fast it turns (degrees per second)
 
     [Header("Shooting Settings")]
     public GameObject bulletPrefab; // Drag your Bullet Prefab here
@@ -64,8 +64,8 @@ public class jet_mov : MonoBehaviour
             // transform.up = movement; 
 
             // Option B: Smooth Turn (Feels more like a vehicle)
-            Quaternion toRotation = Quaternion.LookRotation(Vector3.forward, movement);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
+            //Quaternion toRotation = Quaternion.LookRotation(Vector3.forward, movement);
+            //transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
         }
 
         if (Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space))

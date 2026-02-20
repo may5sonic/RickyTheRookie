@@ -22,7 +22,10 @@ public class Bullet : MonoBehaviour
     void Update()
     {
         // 2. Move the bullet "Up" (which is Forward for your 2D game)
-        transform.Translate(Vector3.up * speed * Time.deltaTime);
+        //transform.Translate(Vector3.up * speed * Time.deltaTime);
+        
+        // Added Space.World so it always flies to the right side of the screen
+        transform.Translate(Vector3.right * speed * Time.deltaTime, Space.World);
     }
     
     // 3. Detect hits (We will use this later for enemies)
