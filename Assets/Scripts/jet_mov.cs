@@ -28,6 +28,10 @@ public class jet_mov : MonoBehaviour
     [Header("Effects")]
     public GameObject deathEffect; // Drag your explosion prefab here
 
+    //For Animations
+    private Rigidbody2D rb;
+    private Animator anim;
+
     void Start()
     {
         // 1. Load the saved data (Just in case we skipped the Main Menu while testing)
@@ -38,6 +42,10 @@ public class jet_mov : MonoBehaviour
         
         // Optional Debug to prove it works in the Console
         Debug.Log("Jet Speed set to: " + speed);
+
+        //For Animations
+        rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     void Update()
@@ -72,6 +80,19 @@ public class jet_mov : MonoBehaviour
         {
             Shoot();
         }
+
+        //For Animations 
+        float vertical = Input.GetAxis("Vertical");
+        // dead zone
+        if (Mathf.Abs(vertical) < 0.1f)
+            vertical = 0;
+
+        // movement
+        rb.linearVelocity = new Vector2(0, vertical * speed);
+
+        // animation
+        anim.SetFloat("Vertical", vertical);
+        
     }
 
     void Shoot()
