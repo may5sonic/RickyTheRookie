@@ -57,7 +57,7 @@ public class SettingsController : MonoBehaviour
     void UpdateText(float value)
     {
         if (speedValueText != null)
-            speedValueText.text = $"Speed: {value:0.0}";
+            speedValueText.text = $"Jet Speed: {value:0.0}";
     }
 
     void UpdateBulletText(float value)
