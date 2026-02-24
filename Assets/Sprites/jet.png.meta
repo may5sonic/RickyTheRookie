@@ -116,12 +116,12 @@ TextureImporter:
       name: jet_0
       rect:
         serializedVersion: 2
-        x: 38
+        x: 0
         y: 34
-        width: 4357
-        height: 4884
+        width: 4933
+        height: 4350
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 1a3d08a9c45eb434d85a1ba671ca8d83
     internalID: 0
     vertices: []
     indices: 
