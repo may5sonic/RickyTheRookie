@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI missileText;
     public TextMeshProUGUI centerText;
     public GameObject restartButton;
+    public GameObject mainmenuButton;
 
     [Header("Game Settings")]
     public int missilesToWin = 10;
@@ -103,6 +104,7 @@ public class GameManager : MonoBehaviour
         centerText.text = "GAME OVER";
         centerText.color = Color.red;
         restartButton.SetActive(true);
+        mainmenuButton.SetActive(true);
         CancelInvoke("AddSurvivalPoints"); // Stop giving points
 
         scoreKeeper = 0;
@@ -114,6 +116,7 @@ public class GameManager : MonoBehaviour
         centerText.text = "YOU WIN PILOT";
         centerText.color = Color.green;
         restartButton.SetActive(true);
+        mainmenuButton.SetActive(true);
         CancelInvoke("AddSurvivalPoints");
         scoreKeeper = currentScore;
     }
