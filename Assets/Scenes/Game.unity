@@ -2426,6 +2426,7 @@ GameObject:
   - component: {fileID: 1967236508}
   - component: {fileID: 1967236509}
   - component: {fileID: 1967236510}
+  - component: {fileID: 1967236511}
   m_Layer: 0
   m_Name: jet
   m_TagString: Untagged
@@ -2559,7 +2560,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1967236503}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f48112cc2a54a4cb78ac82257a5b84ed, type: 3}
   m_Name: 
@@ -2633,6 +2634,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1967236511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1967236503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ef2af86174684c0a8b881ecabf4c845, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerDeath
+  deathEffect: {fileID: 713417785191214622, guid: e9fd406519d94d749b195a039b88e6a7, type: 3}
 --- !u!1 &2005777468
 GameObject:
   m_ObjectHideFlags: 0

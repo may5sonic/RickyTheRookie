@@ -102,29 +102,29 @@ public class jet_mov : MonoBehaviour
     }
 
     // This catches "Trigger" hits (passing through objects)
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        // Check for the tag "missile" (lowercase, just like you have it)
-        if (other.CompareTag("missile") || other.name.Contains("missile"))
-        {
-            Die();
-        }
-    }
+    // void OnTriggerEnter2D(Collider2D other)
+    // {
+    //     // Check for the tag "missile" (lowercase, just like you have it)
+    //     if (other.CompareTag("missile") || other.name.Contains("missile"))
+    //     {
+    //         Die();
+    //     }
+    // }
 
-    void Die()
-    {
-        GameManager.instance.GameOver();
+    // void Die()
+    // {
+    //     GameManager.instance.GameOver();
 
-        // --- NEW CODE ---
-        // Spawn the explosion at the PLAYER'S position
-        if (deathEffect != null)
-        {
-            Instantiate(deathEffect, transform.position, Quaternion.identity);
-        }
-        // ----------------
+    //     // --- NEW CODE ---
+    //     // Spawn the explosion at the PLAYER'S position
+    //     if (deathEffect != null)
+    //     {
+    //         Instantiate(deathEffect, transform.position, Quaternion.identity);
+    //     }
+    //     // ----------------
 
-        Destroy(gameObject);
-    }
+    //     Destroy(gameObject);
+    // }
 
     void LateUpdate()
     {

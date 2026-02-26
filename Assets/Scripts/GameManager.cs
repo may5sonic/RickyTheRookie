@@ -98,9 +98,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void GameOver()
+    public void PlayerDied()
     {
         isGameActive = false;
+        SetState(GameState.GameOver); // player death
         centerText.text = "GAME OVER";
         centerText.color = Color.red;
         restartButton.SetActive(true);
