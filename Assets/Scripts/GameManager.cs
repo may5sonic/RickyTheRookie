@@ -17,17 +17,22 @@ public class GameManager : MonoBehaviour
 
 
     public static int scoreKeeper = 0;
+    public static int currentLives = 3;
+    public static int currentRound = 1;
 
     [Header("UI Settings")]
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI missileText;
     public TextMeshProUGUI centerText;
+    public TextMeshProUGUI livesText; // NEW: Make sure to create this text in Unity!
     public GameObject restartButton;
     public GameObject mainmenuButton;
 
     [Header("Game Settings")]
     public int missilesToWin = 10;
     public int scorePerMissile = 100;
+    public int maxRounds = 3; // NEW: Rounds per level
+    public string nextLevelName; // NEW: Type "Level_2" (or your scene name) in the Inspector
 
     private int currentScore = 0;
     private int currentMissilesLeft;
@@ -52,10 +57,10 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-
         currentScore = scoreKeeper;
 
-        currentMissilesLeft = missilesToWin;
+        //currentMissilesLeft = missilesToWin;
+        currentMissilesLeft = missilesToWin + (currentRound * 2);
         UpdateUI();
 
         // Start adding survival points every 1 second
@@ -64,7 +69,8 @@ public class GameManager : MonoBehaviour
 
     void AddSurvivalPoints()
     {
-        if (isGameActive)
+        //if (isGameActive)
+        if (isGameActive && CurrentState == GameState.Playing)
         {
             currentScore += 1; // +1 point for every second you survive
             UpdateUI();
@@ -94,36 +100,91 @@ public class GameManager : MonoBehaviour
         // 3. Check for Win
         if (currentMissilesLeft <= 0)
         {
-            WinGame();
+            //WinGame();
+            RoundComplete();
         }
     }
 
     public void PlayerDied()
     {
         isGameActive = false;
+        currentLives--; // Lose of life
         SetState(GameState.GameOver); // player death
-        centerText.text = "GAME OVER";
-        centerText.color = Color.red;
-        restartButton.SetActive(true);
-        mainmenuButton.SetActive(true);
+        //centerText.text = "GAME OVER";
+        //centerText.color = Color.red;
         CancelInvoke("AddSurvivalPoints"); // Stop giving points
 
-        scoreKeeper = 0;
-    }
-
-    void WinGame()
-    {
-        isGameActive = false;
-        centerText.text = "YOU WIN PILOT";
-        centerText.color = Color.green;
         restartButton.SetActive(true);
         mainmenuButton.SetActive(true);
+
+        //scoreKeeper = 0;
+
+        if (currentLives > 0)
+        {
+            centerText.text = "SHIP DESTROYED\nLIVES LEFT: " + currentLives;
+            centerText.color = Color.yellow;
+            restartButton.GetComponentInChildren<TextMeshProUGUI>().text = "DEPLOY BACKUP";
+        }
+
+        else
+        {
+            centerText.text = "GAME OVER";
+            centerText.color = Color.red;
+            restartButton.GetComponentInChildren<TextMeshProUGUI>().text = "RESTART CAMPAIGN";
+            
+            // Wipe memory for a totally fresh run
+            scoreKeeper = 0;
+            currentLives = 3;
+            currentRound = 1;
+        }
+    }
+
+    //void WinGame()
+    //{
+    //    isGameActive = false;
+    //    centerText.text = "YOU WIN PILOT";
+    //    centerText.color = Color.green;
+    //    restartButton.SetActive(true);
+    //    mainmenuButton.SetActive(true);
+    //    CancelInvoke("AddSurvivalPoints");
+    //    scoreKeeper = currentScore;
+    //}
+    void RoundComplete()
+    {
+        isGameActive = false;
+        scoreKeeper = currentScore; // Save score
+        SetState(GameState.GameOver); // Use GameOver state to pause time and show menus
         CancelInvoke("AddSurvivalPoints");
-        scoreKeeper = currentScore;
+
+        restartButton.SetActive(true);
+        mainmenuButton.SetActive(true);
+
+        if (currentRound < maxRounds)
+        {
+            centerText.text = "ROUND " + currentRound + " CLEARED";
+            centerText.color = Color.green;
+            restartButton.GetComponentInChildren<TextMeshProUGUI>().text = "NEXT ROUND";
+            currentRound++; 
+        }
+        else
+        {
+            centerText.text = "LEVEL COMPLETE!";
+            centerText.color = Color.cyan;
+            restartButton.GetComponentInChildren<TextMeshProUGUI>().text = "NEXT SECTOR";
+            currentRound = 1; // Reset rounds for the new level
+        }
     }
 
     public void RestartGame()
     {
+        Time.timeScale = 1f; // Ensure time unpauses
+        string buttonAction = restartButton.GetComponentInChildren<TextMeshProUGUI>().text;
+
+        if (buttonAction == "NEXT SECTOR")
+        {
+            SceneManager.LoadScene(nextLevelName);
+        }
+        else
         // This reloads the current scene (resets everything)
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
@@ -132,6 +193,7 @@ public class GameManager : MonoBehaviour
     {
         scoreText.text = "Score: " + currentScore;
         missileText.text = "Missiles Left: " + Mathf.Max(0, currentMissilesLeft);
+        if (livesText != null) livesText.text = "Lives: " + currentLives;
     }
 
     void OnDestroy()
@@ -148,7 +210,8 @@ public class GameManager : MonoBehaviour
         {
             SetState(GameState.MainMenu);
         }
-        else if (scene.name == "Game") 
+        //else if (scene.name == "Game") 
+        else if (scene.name == "Game" || scene.name.Contains("Level"))
         {
             isGameActive = true;  // makes sure missile spawner loads
             SetState(GameState.Playing);

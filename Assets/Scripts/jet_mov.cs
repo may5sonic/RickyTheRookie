@@ -27,6 +27,7 @@ public class jet_mov : MonoBehaviour
     
     [Header("Effects")]
     public GameObject deathEffect; // Drag your explosion prefab here
+    public int health = 3; // --- NEW: Pilot Health ---
 
     //For Animations
     private Rigidbody2D rb;
@@ -66,15 +67,15 @@ public class jet_mov : MonoBehaviour
         //         body.linearVelocity = new Vector2(body.linearVelocity.x, speed);
         // }
 
-        if (movement != Vector3.zero)
-        {
+        //if (movement != Vector3.zero)
+        //{
             // Option A: Instant Snap (Good for very twitchy games)
             // transform.up = movement; 
 
             // Option B: Smooth Turn (Feels more like a vehicle)
             //Quaternion toRotation = Quaternion.LookRotation(Vector3.forward, movement);
             //transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
-        }
+        //}
 
         if (Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Space))
         {
@@ -84,8 +85,7 @@ public class jet_mov : MonoBehaviour
         //For Animations 
         float vertical = Input.GetAxis("Vertical");
         // dead zone
-        if (Mathf.Abs(vertical) < 0.1f)
-            vertical = 0;
+        if (Mathf.Abs(vertical) < 0.1f) vertical = 0;
 
         // movement
         rb.linearVelocity = new Vector2(0, vertical * speed);
@@ -99,6 +99,55 @@ public class jet_mov : MonoBehaviour
     {
         // Spawn the bullet at the FirePoint's position and rotation
         Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("missile") || other.name.Contains("missile"))
+        {
+            TakeDamage(other.gameObject);
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("missile") || collision.gameObject.name.Contains("missile"))
+        {
+            TakeDamage(collision.gameObject);
+        }
+    }
+
+    void TakeDamage(GameObject hazard)
+    {
+        health--; 
+        Destroy(hazard); // Destroy the missile that hit us
+
+        // Optional: Spawn explosion for taking damage
+        if (deathEffect != null)
+        {
+            Instantiate(deathEffect, transform.position, Quaternion.identity);
+        }
+
+        if (health <= 0)
+        {
+            Die();
+        }
+        else
+        {
+            Debug.Log("Hit! Health remaining: " + health);
+        }
+    }
+
+    void Die()
+    {
+        GameManager.instance.PlayerDied();
+
+        if (deathEffect != null)
+        {
+            Instantiate(deathEffect, transform.position, Quaternion.identity);
+        }
+
+        Destroy(gameObject);
     }
 
     // This catches "Trigger" hits (passing through objects)
