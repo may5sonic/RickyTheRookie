@@ -1707,7 +1707,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7db69622fcbdbc94f8f7832508c8b186, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScrollBackground
-  speed: 2
+  speed: 10
 --- !u!1 &1130702226
 GameObject:
   m_ObjectHideFlags: 0
@@ -2593,7 +2593,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7db69622fcbdbc94f8f7832508c8b186, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScrollBackground
-  speed: 2
+  speed: 10
 --- !u!212 &1850657019
 SpriteRenderer:
   serializedVersion: 2
@@ -3149,6 +3149,7 @@ MonoBehaviour:
   missileText: {fileID: 798395997}
   centerText: {fileID: 1656899829}
   livesText: {fileID: 616124627}
+  highScoreText: {fileID: 0}
   restartButton: {fileID: 1130702226}
   mainmenuButton: {fileID: 1400760375}
   missilesToWin: 10

@@ -364,7 +364,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7db69622fcbdbc94f8f7832508c8b186, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScrollBackground
-  speed: 2
+  speed: 11
 --- !u!212 &209308340
 SpriteRenderer:
   serializedVersion: 2
@@ -1779,7 +1779,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7db69622fcbdbc94f8f7832508c8b186, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScrollBackground
-  speed: 2
+  speed: 11
 --- !u!212 &1316764258
 SpriteRenderer:
   serializedVersion: 2
@@ -2556,7 +2556,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7db69622fcbdbc94f8f7832508c8b186, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScrollBackground
-  speed: 2
+  speed: 11
 --- !u!212 &1753956962
 SpriteRenderer:
   serializedVersion: 2
