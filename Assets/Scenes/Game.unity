@@ -3148,13 +3148,13 @@ MonoBehaviour:
   scoreText: {fileID: 1017010556}
   missileText: {fileID: 798395997}
   centerText: {fileID: 1656899829}
-  livesText: {fileID: 0}
+  livesText: {fileID: 616124627}
   restartButton: {fileID: 1130702226}
   mainmenuButton: {fileID: 1400760375}
   missilesToWin: 10
   scorePerMissile: 100
   maxRounds: 3
-  nextLevelName: 
+  nextLevelName: Level_2
   isGameActive: 1
 --- !u!4 &2024301575
 Transform:
