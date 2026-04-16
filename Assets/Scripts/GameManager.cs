@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI missileText;
     public TextMeshProUGUI centerText;
     public TextMeshProUGUI livesText; // NEW: Make sure to create this text in Unity!
+    public TextMeshProUGUI highScoreText;
     public GameObject restartButton;
     public GameObject mainmenuButton;
 
@@ -36,6 +37,7 @@ public class GameManager : MonoBehaviour
 
     private int currentScore = 0;
     private int currentMissilesLeft;
+    private int highScore;
     public bool isGameActive = true;
 
     void Awake()
@@ -57,10 +59,14 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        currentScore = scoreKeeper;
+        currentScore = scoreKeeper; // restores score
 
         //currentMissilesLeft = missilesToWin;
         currentMissilesLeft = missilesToWin + (currentRound * 2);
+
+        // loads saved highscore
+        highScore = PlayerPrefs.GetInt("HighScore", 0);
+
         UpdateUI();
 
         // Start adding survival points every 1 second
@@ -75,6 +81,20 @@ public class GameManager : MonoBehaviour
             currentScore += 1; // +1 point for every second you survive
             UpdateUI();
         }
+    }
+
+    bool CheckHighScore() {
+        if (currentScore > highScore) {
+            highScore = currentScore;
+            PlayerPrefs.SetInt("HighScore", highScore);
+            PlayerPrefs.Save();
+
+            centerText.text = "NEW HIGHSCORE!";
+            centerText.color = Color.yellow;
+
+            return true;
+        }
+        return false;
     }
 
     public void AddScore(int amount)
@@ -121,6 +141,8 @@ public class GameManager : MonoBehaviour
 
         if (currentLives > 0)
         {
+            scoreKeeper = currentScore; // saves score in between lives
+
             centerText.text = "SHIP DESTROYED\nLIVES LEFT: " + currentLives;
             centerText.color = Color.yellow;
             restartButton.GetComponentInChildren<TextMeshProUGUI>().text = "DEPLOY BACKUP";
@@ -128,8 +150,13 @@ public class GameManager : MonoBehaviour
 
         else
         {
-            centerText.text = "GAME OVER";
-            centerText.color = Color.red;
+            bool isNewHigh = CheckHighScore(); // check score before games ends
+
+            if (!isNewHigh) {
+                centerText.text = "GAME OVER";
+                centerText.color = Color.red;
+            }
+
             restartButton.GetComponentInChildren<TextMeshProUGUI>().text = "RESTART CAMPAIGN";
             
             // Wipe memory for a totally fresh run
@@ -168,8 +195,13 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            centerText.text = "LEVEL COMPLETE!";
-            centerText.color = Color.cyan;
+            bool isNewHigh = CheckHighScore(); // check score after level complete 
+
+            if (!isNewHigh) {
+                centerText.text = "LEVEL COMPLETE!";
+                centerText.color = Color.cyan;
+            }
+
             restartButton.GetComponentInChildren<TextMeshProUGUI>().text = "NEXT SECTOR";
             currentRound = 1; // Reset rounds for the new level
         }
@@ -193,7 +225,14 @@ public class GameManager : MonoBehaviour
     {
         scoreText.text = "Score: " + currentScore;
         missileText.text = "Missiles Left: " + Mathf.Max(0, currentMissilesLeft);
-        if (livesText != null) livesText.text = "Lives: " + currentLives;
+
+        if (livesText != null) {
+            livesText.text = "Lives: " + currentLives;
+        }
+
+        if (highScoreText != null) {
+            highScoreText.text = "High Score: " + highScore;
+        }
     }
 
     void OnDestroy()
