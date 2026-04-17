@@ -103,7 +103,11 @@ public class jet_mov : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("missile") || other.name.Contains("missile"))
+        // Convert the name to completely lowercase to avoid spelling mismatches
+        string hitName = other.name.ToLower();
+
+        if (other.CompareTag("missile") || hitName.Contains("missile") || 
+            other.CompareTag("cloud") || hitName.Contains("cloud"))
         {
             TakeDamage(other.gameObject);
         }
@@ -111,7 +115,10 @@ public class jet_mov : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("missile") || collision.gameObject.name.Contains("missile"))
+        string hitName = collision.gameObject.name.ToLower();
+
+        if (collision.gameObject.CompareTag("missile") || hitName.Contains("missile") ||
+            collision.gameObject.CompareTag("cloud") || hitName.Contains("cloud"))
         {
             TakeDamage(collision.gameObject);
         }

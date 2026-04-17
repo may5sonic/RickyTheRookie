@@ -6,6 +6,7 @@ TagManager:
   tags:
   - missile
   - Boundary
+  - cloud
   layers:
   - Default
   - TransparentFX
