@@ -6,7 +6,7 @@ public class missile_spawn : MonoBehaviour
 {
 
     public GameObject missilePrefab;
-    public float spawnRate = 2f;
+    //public float spawnRate = 2f;
     public float minY = -4f;
     public float maxY = 4f;
 
@@ -14,10 +14,19 @@ public class missile_spawn : MonoBehaviour
     // Set this to 10 in the Inspector to get your 0-10 degree variance
     public float maxRotationAngle = 10f;
 
+    [Header("Difficulty Settings")]
+    public float baseSpawnRate = 2f;
+    public float minSpawnRate = 0.4f;
+    public float speedIncreasePerRound = 0.3f;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        InvokeRepeating(nameof(SpawnMissile), 1f, spawnRate);
+        //InvokeRepeating(nameof(SpawnMissile), 1f, spawnRate);
+        float currentSpawnRate = baseSpawnRate - (GameManager.currentRound * speedIncreasePerRound);
+        currentSpawnRate = Mathf.Max(currentSpawnRate, minSpawnRate);
+        Debug.Log("Round " + GameManager.currentRound + " | Missile Spawn Rate: " + currentSpawnRate);
+        InvokeRepeating(nameof(SpawnMissile), 1f, currentSpawnRate);
     }
 
 

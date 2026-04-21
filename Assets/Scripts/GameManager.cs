@@ -20,6 +20,11 @@ public class GameManager : MonoBehaviour
     public static int currentLives = 3;
     public static int currentRound = 1;
 
+    [Header("Boss Settings")]
+    public bool isBossLevel = false; // Check this ONLY in the Level_3 Inspector!
+    public GameObject bossPrefab;
+    private bool bossActive = false;
+
     [Header("UI Settings")]
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI missileText;
@@ -118,11 +123,46 @@ public class GameManager : MonoBehaviour
         UpdateUI();
 
         // 3. Check for Win
-        if (currentMissilesLeft <= 0)
+        if (currentMissilesLeft <= 0 && !bossActive)
         {
-            //WinGame();
-            RoundComplete();
+            if (isBossLevel && currentRound == maxRounds)
+            {
+                SpawnBoss();
+            }
+            else
+            {
+                RoundComplete(); 
+            }
         }
+    }
+
+    void SpawnBoss()
+    {
+        bossActive = true;
+        centerText.text = "WARNING: ENEMY FLAGSHIP APPROACHING";
+        centerText.color = Color.red;
+
+        Invoke(nameof(ClearCenterText), 3f);
+        
+        // Spawn the Boss just off the right edge of the screen
+        Instantiate(bossPrefab, new Vector3(12f, 0f, 0f), Quaternion.identity);
+    }
+
+    void ClearCenterText()
+    {
+        // We only clear it if the player is still alive 
+        // (so we don't accidentally erase a "GAME OVER" screen)
+        if (isGameActive)
+        {
+            centerText.text = "";
+        }
+    }
+
+    public void BossDefeated()
+    {
+        AddScore(1000); // Big point bonus
+        bossActive = false;
+        RoundComplete(); // This will trigger the "Level Complete" screen
     }
 
     public void PlayerDied()

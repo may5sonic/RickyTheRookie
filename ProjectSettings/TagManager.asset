@@ -7,6 +7,9 @@ TagManager:
   - missile
   - Boundary
   - cloud
+  - airplane
+  - boss
+  - powerup
   layers:
   - Default
   - TransparentFX

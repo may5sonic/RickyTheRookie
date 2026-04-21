@@ -414,7 +414,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 8753409587560654898, guid: 01ea6d5e6cbe84ed89f6e1835a25eec9, type: 3}
+  m_Sprite: {fileID: 1626694781901718007, guid: a458c0fe936374c3685eb8642614562f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -675,6 +675,56 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &515877323
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 515877325}
+  - component: {fileID: 515877324}
+  m_Layer: 0
+  m_Name: CloudSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &515877324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 515877323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e08d4e0233a54f4f88e8d3ff51e6ee5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Cloud_Spawn
+  cloudPrefab: {fileID: 4556868882300345297, guid: ee9403a7809ea1e499e53f4adfa32b9b, type: 3}
+  minY: -4
+  maxY: 4
+  baseSpawnRate: 5
+  minSpawnRate: 1.8
+  speedIncreasePerRound: 0.8
+--- !u!4 &515877325
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 515877323}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.68969, y: -0.42486, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &616439209
 GameObject:
   m_ObjectHideFlags: 0
@@ -912,7 +962,7 @@ Transform:
   - {fileID: 1089626008}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &658949019
+--- !u!1 &817088095
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -920,8 +970,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 658949021}
-  - component: {fileID: 658949020}
+  - component: {fileID: 817088097}
+  - component: {fileID: 817088096}
   m_Layer: 0
   m_Name: PowerSpawner
   m_TagString: Untagged
@@ -929,13 +979,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &658949020
+--- !u!114 &817088096
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 658949019}
+  m_GameObject: {fileID: 817088095}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1e08d4e0233a54f4f88e8d3ff51e6ee5, type: 3}
@@ -947,13 +997,13 @@ MonoBehaviour:
   baseSpawnRate: 15
   minSpawnRate: 15
   speedIncreasePerRound: 0.5
---- !u!4 &658949021
+--- !u!4 &817088097
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 658949019}
+  m_GameObject: {fileID: 817088095}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.68969, y: -0.42486, z: 0}
@@ -1027,6 +1077,56 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab7483ac344f5774fa73d7559e907ec5, type: 3}
+--- !u!1 &936154324
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 936154326}
+  - component: {fileID: 936154325}
+  m_Layer: 0
+  m_Name: AirplaneSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &936154325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 936154324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7a22e87d7520194e8cd8fbca3f402e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Airplane_Spawn
+  airplanePrefab: {fileID: 5498831828232647639, guid: 5509a1127ebaf744a8c7be3702db4d54, type: 3}
+  minY: -4
+  maxY: 4
+  baseSpawnRate: 4
+  minSpawnRate: 1.5
+  speedIncreasePerRound: 0.5
+--- !u!4 &936154326
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 936154324}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.68969, y: -0.42486, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &984036810
 GameObject:
   m_ObjectHideFlags: 0
@@ -1193,8 +1293,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7125f805aed93564ab277e913ca0bd45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  isBossLevel: 0
-  bossPrefab: {fileID: 0}
+  isBossLevel: 1
+  bossPrefab: {fileID: 5498831828232647639, guid: e70fd3559a752a547bf8253ddfd68c0a, type: 3}
   scoreText: {fileID: 1189339068}
   missileText: {fileID: 1652341496}
   centerText: {fileID: 1736334052}
@@ -1881,7 +1981,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 4357642827007901314, guid: 844e783b4e59f4a8db3e737d0b5ca96b, type: 3}
+  m_Sprite: {fileID: 8393118581567539116, guid: c0455eacc7b6a4d62a6ae09c753aa2d2, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2157,7 +2257,7 @@ MonoBehaviour:
   maxRotationAngle: 10
   baseSpawnRate: 4
   minSpawnRate: 0.8
-  speedIncreasePerRound: 0.4
+  speedIncreasePerRound: 0.6
 --- !u!4 &1629103731
 Transform:
   m_ObjectHideFlags: 0
@@ -2580,56 +2680,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 1.3482}
   m_SizeDelta: {x: 500, y: 97.3036}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1742651479
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1742651481}
-  - component: {fileID: 1742651480}
-  m_Layer: 0
-  m_Name: CloudSpawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1742651480
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1742651479}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e08d4e0233a54f4f88e8d3ff51e6ee5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Cloud_Spawn
-  cloudPrefab: {fileID: 4556868882300345297, guid: ee9403a7809ea1e499e53f4adfa32b9b, type: 3}
-  minY: -4
-  maxY: 4
-  baseSpawnRate: 4
-  minSpawnRate: 1.7
-  speedIncreasePerRound: 0.7
---- !u!4 &1742651481
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1742651479}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.68969, y: -0.42486, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1753956960
 GameObject:
   m_ObjectHideFlags: 0
@@ -2710,7 +2760,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -7608573960640424022, guid: 222873118c2674e0b97e4d119edfbac9, type: 3}
+  m_Sprite: {fileID: 47872849639991199, guid: ae3985d6c61674a2f9fd4bb92632fa5c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2731,56 +2781,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 7.37}
   m_LocalScale: {x: 1.9828616, y: 1.3466064, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1807214571
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1807214573}
-  - component: {fileID: 1807214572}
-  m_Layer: 0
-  m_Name: AirplaneSpawner
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1807214572
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1807214571}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7a22e87d7520194e8cd8fbca3f402e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Airplane_Spawn
-  airplanePrefab: {fileID: 5498831828232647639, guid: 5509a1127ebaf744a8c7be3702db4d54, type: 3}
-  minY: -4
-  maxY: 4
-  baseSpawnRate: 4
-  minSpawnRate: 1.5
-  speedIncreasePerRound: 0.5
---- !u!4 &1807214573
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1807214571}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.68969, y: -0.42486, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -3185,6 +3185,6 @@ SceneRoots:
   - {fileID: 407001784}
   - {fileID: 916020741}
   - {fileID: 1203896019}
-  - {fileID: 1742651481}
-  - {fileID: 1807214573}
-  - {fileID: 658949021}
+  - {fileID: 515877325}
+  - {fileID: 936154326}
+  - {fileID: 817088097}

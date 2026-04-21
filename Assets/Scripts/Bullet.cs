@@ -31,9 +31,10 @@ public class Bullet : MonoBehaviour
     // 3. Detect hits (We will use this later for enemies)
     void OnTriggerEnter2D(Collider2D hitInfo)
     {
+        string hitName = hitInfo.gameObject.name.ToLower();
         // Check if the thing we hit is a Missile
         // We check the Tag OR if the name contains "missile"
-        if (hitInfo.CompareTag("missile") || hitInfo.gameObject.name.Contains("missile") || hitInfo.gameObject.name.Contains("Missile(Clone)"))
+        if (hitInfo.CompareTag("missile") || hitName.Contains("missile"))
         {
             // This part tells our GameManager the missile was destoryed
             GameManager.instance.MissileDestroyed();
@@ -51,6 +52,33 @@ public class Bullet : MonoBehaviour
             
             // Optional: This is where you would play an explosion sound or spawn an effect
             // Instantiate(explosionPrefab, transform.position, transform.rotation);
+        }
+
+        else if (hitInfo.CompareTag("airplane") || hitName.Contains("airplane"))
+        {
+            GameManager.instance.AddScore(50); // Airplanes just give points
+
+            if (deathEffect != null)
+            {
+                Instantiate(deathEffect, hitInfo.transform.position, Quaternion.identity);
+            }
+
+            Destroy(hitInfo.gameObject); // Destroy the Airplane
+            Destroy(gameObject);         // Destroy the Bullet
+        }
+
+        // --- 3. DID WE HIT THE BOSS? (NEW) ---
+        else if (hitInfo.CompareTag("boss") || hitName.Contains("boss"))
+        {
+            // We DO NOT destroy the Boss here. We tell the Boss script it got hurt.
+            hitInfo.GetComponent<Boss>().TakeDamage();
+
+            if (deathEffect != null)
+            {
+                Instantiate(deathEffect, hitInfo.transform.position, Quaternion.identity);
+            }
+
+            Destroy(gameObject); // The bullet shatters against the Boss armor
         }
         // Debug.Log("Hit " + hitInfo.name);
         // Destroy(gameObject); // Destroy bullet on impact

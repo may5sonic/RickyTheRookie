@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cloud_Spawn : MonoBehaviour
+public class Powerup_Spawn : MonoBehaviour
 {
-    public GameObject cloudPrefab;
-    //public float spawnRate = 4f; // Spawns a cloud every 5 seconds
+    public GameObject PowerupPrefab;
+    //public float spawnRate = 4f; // Spawns a Powerup every 5 seconds
     public float minY = -4f;
     public float maxY = 4f;
 
@@ -17,19 +17,19 @@ public class Cloud_Spawn : MonoBehaviour
     void Start()
     {
         // Start the repeating timer
-        //InvokeRepeating(nameof(SpawnCloud), 2f, spawnRate);
+        //InvokeRepeating(nameof(SpawnPowerup), 2f, spawnRate);
         float currentSpawnRate = baseSpawnRate - (GameManager.currentRound * speedIncreasePerRound);
         currentSpawnRate = Mathf.Max(currentSpawnRate, minSpawnRate);
-        Debug.Log("Round " + GameManager.currentRound + " | Cloud Spawn Rate: " + currentSpawnRate);
-        InvokeRepeating(nameof(SpawnCloud), 1f, currentSpawnRate);
+        Debug.Log("Round " + GameManager.currentRound + " | Powerup Spawn Rate: " + currentSpawnRate);
+        InvokeRepeating(nameof(SpawnPowerup), 1f, currentSpawnRate);
     }
 
-    void SpawnCloud() 
+    void SpawnPowerup() 
     {
         // 1. Check if game is active
         if (GameManager.instance.isGameActive == false)
         {
-            CancelInvoke(nameof(SpawnCloud)); 
+            CancelInvoke(nameof(SpawnPowerup)); 
             return;
         }
 
@@ -37,6 +37,6 @@ public class Cloud_Spawn : MonoBehaviour
         float spawnY = Random.Range(minY, maxY);
         Vector3 spawnPos = new Vector3(12f, spawnY, 0f);
 
-        Instantiate(cloudPrefab, spawnPos, Quaternion.identity);
+        Instantiate(PowerupPrefab, spawnPos, Quaternion.identity);
     }
 }

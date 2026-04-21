@@ -33,6 +33,8 @@ public class jet_mov : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
 
+    private bool hasDoubleFire = false;
+
     void Start()
     {
         // 1. Load the saved data (Just in case we skipped the Main Menu while testing)
@@ -98,7 +100,22 @@ public class jet_mov : MonoBehaviour
     void Shoot()
     {
         // Spawn the bullet at the FirePoint's position and rotation
-        Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        //Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        if (hasDoubleFire)
+        {
+            // Calculate a position slightly above and below the main FirePoint
+            Vector3 topGun = firePoint.position + new Vector3(0, 0.4f, 0);
+            Vector3 bottomGun = firePoint.position + new Vector3(0, -0.4f, 0);
+
+            // Fire two bullets!
+            Instantiate(bulletPrefab, topGun, firePoint.rotation);
+            Instantiate(bulletPrefab, bottomGun, firePoint.rotation);
+        }
+        else
+        {
+            // Normal single fire
+            Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -106,11 +123,32 @@ public class jet_mov : MonoBehaviour
         // Convert the name to completely lowercase to avoid spelling mismatches
         string hitName = other.name.ToLower();
 
+        //Check for Power-Up First
+        if (other.CompareTag("powerup") || hitName.Contains("powerup"))
+        {
+            ActivatePowerUp();
+            Destroy(other.gameObject); // Destroy the floating item
+            return; // Stop running this function so we don't take damage!
+        }
+
         if (other.CompareTag("missile") || hitName.Contains("missile") || 
             other.CompareTag("cloud") || hitName.Contains("cloud"))
         {
             TakeDamage(other.gameObject);
         }
+    }
+
+    void ActivatePowerUp()
+    {
+        hasDoubleFire = true;
+        CancelInvoke(nameof(ResetPowerUp));
+        Invoke(nameof(ResetPowerUp), 8f);
+    }
+
+    void ResetPowerUp()
+    {
+        hasDoubleFire = false;
+        Debug.Log("Power-up expired. Back to single fire.");
     }
 
     void OnCollisionEnter2D(Collision2D collision)
