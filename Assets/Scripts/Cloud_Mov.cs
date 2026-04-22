@@ -6,8 +6,10 @@ public class Cloud_Mov : MonoBehaviour
 
     void Update()
     {
+        float difficulty = GameManager.instance != null ? GameManager.instance.DifficultyMultiplier : 1f;
+
         // Move to the left 
-        transform.Translate(Vector3.left * speed * Time.deltaTime, Space.World);
+        transform.Translate(Vector3.left * (speed * difficulty) * Time.deltaTime, Space.World);
 
         // Destroy the cloud if it passes the left edge of the screen
         if (transform.position.x < -15f)

@@ -16,10 +16,8 @@ public class Airplane_Spawn : MonoBehaviour
 
     void Start()
     {
-        // Start the repeating timer
-        //InvokeRepeating(nameof(SpawnCloud), 2f, spawnRate);
-        float currentSpawnRate = baseSpawnRate - (GameManager.currentRound * speedIncreasePerRound);
-        currentSpawnRate = Mathf.Max(currentSpawnRate, minSpawnRate);
+        float difficulty = GameManager.instance != null ? GameManager.instance.DifficultyMultiplier : 1f;
+        float currentSpawnRate = Mathf.Max(baseSpawnRate / Mathf.Max(0.01f, difficulty), minSpawnRate);
         Debug.Log("Round " + GameManager.currentRound + " | Airplane Spawn Rate: " + currentSpawnRate);
         InvokeRepeating(nameof(SpawnAirplane), 1f, currentSpawnRate);
     }
@@ -27,7 +25,7 @@ public class Airplane_Spawn : MonoBehaviour
     void SpawnAirplane() 
     {
         // 1. Check if game is active
-        if (GameManager.instance.isGameActive == false)
+        if (GameManager.instance == null || !GameManager.instance.spawningEnabled || !GameManager.instance.IsPlaying)
         {
             CancelInvoke(nameof(SpawnAirplane)); 
             return;

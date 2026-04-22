@@ -1,4 +1,0 @@
-repository "Ricky The Rookiee/Ricky The Rookiee@20067550695046@cloud"
-  path "/"
-    br "/main"
-    co "/main"

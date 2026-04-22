@@ -22,9 +22,8 @@ public class missile_spawn : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //InvokeRepeating(nameof(SpawnMissile), 1f, spawnRate);
-        float currentSpawnRate = baseSpawnRate - (GameManager.currentRound * speedIncreasePerRound);
-        currentSpawnRate = Mathf.Max(currentSpawnRate, minSpawnRate);
+        float difficulty = GameManager.instance != null ? GameManager.instance.DifficultyMultiplier : 1f;
+        float currentSpawnRate = Mathf.Max(baseSpawnRate / Mathf.Max(0.01f, difficulty), minSpawnRate);
         Debug.Log("Round " + GameManager.currentRound + " | Missile Spawn Rate: " + currentSpawnRate);
         InvokeRepeating(nameof(SpawnMissile), 1f, currentSpawnRate);
     }
@@ -32,7 +31,7 @@ public class missile_spawn : MonoBehaviour
 
     void SpawnMissile() {
 
-        if (GameManager.instance.isGameActive == false)
+        if (GameManager.instance == null || !GameManager.instance.spawningEnabled || !GameManager.instance.IsPlaying)
         {
             CancelInvoke(nameof(SpawnMissile));
             return;

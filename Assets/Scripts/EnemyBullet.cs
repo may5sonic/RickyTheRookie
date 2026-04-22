@@ -12,7 +12,9 @@ public class EnemyBullet : MonoBehaviour
 
     void Update()
     {
+        float difficulty = GameManager.instance != null ? GameManager.instance.DifficultyMultiplier : 1f;
+
         // Flies to the LEFT
-        transform.Translate(Vector3.left * speed * Time.deltaTime, Space.World);
+        transform.Translate(Vector3.left * (speed * difficulty) * Time.deltaTime, Space.World);
     }
 }

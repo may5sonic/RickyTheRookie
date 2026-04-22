@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
 
     public GameState CurrentState { get; private set; }
 
+    public bool IsPlaying => CurrentState == GameState.Playing;
+
     public static event Action<GameState> OnGameStateChanged;
 
 
@@ -24,6 +26,17 @@ public class GameManager : MonoBehaviour
     public bool isBossLevel = false; // Check this ONLY in the Level_3 Inspector!
     public GameObject bossPrefab;
     private bool bossActive = false;
+
+    [Header("Round Timer")]
+    public float[] roundDurations = new float[] { 30f, 45f, 60f };
+    public TextMeshProUGUI timeText;
+    public float RoundTimeRemaining { get; private set; }
+    private Coroutine roundTimerRoutine;
+
+    [Header("Difficulty")]
+    public float difficultyPerRound = 0.25f;
+    public float difficultyPerLevel = 0.5f;
+    public float DifficultyMultiplier { get; private set; } = 1f;
 
     [Header("UI Settings")]
     public TextMeshProUGUI scoreText;
@@ -39,11 +52,12 @@ public class GameManager : MonoBehaviour
     public int scorePerMissile = 100;
     public int maxRounds = 3; // NEW: Rounds per level
     public string nextLevelName; // NEW: Type "Level_2" (or your scene name) in the Inspector
+    public int currentLevelNumber = 1;
 
     private int currentScore = 0;
-    private int currentMissilesLeft;
     private int highScore;
     public bool isGameActive = true;
+    public bool spawningEnabled = true;
 
     void Awake()
     {
@@ -66,16 +80,90 @@ public class GameManager : MonoBehaviour
     {
         currentScore = scoreKeeper; // restores score
 
-        //currentMissilesLeft = missilesToWin;
-        currentMissilesLeft = missilesToWin + (currentRound * 2);
+        if (roundDurations == null || roundDurations.Length == 0)
+        {
+            roundDurations = new float[] { 30f, 45f, 60f };
+        }
+
+        maxRounds = Mathf.Clamp(maxRounds, 1, roundDurations.Length);
 
         // loads saved highscore
         highScore = PlayerPrefs.GetInt("HighScore", 0);
+
+        ApplyLevelContentConfig();
+        StartNewRound();
 
         UpdateUI();
 
         // Start adding survival points every 1 second
         InvokeRepeating("AddSurvivalPoints", 1f, 1f);
+    }
+
+    void StartNewRound()
+    {
+        isGameActive = true;
+        spawningEnabled = true;
+        bossActive = false;
+
+        ApplyDifficulty();
+        RoundTimeRemaining = GetRoundDurationSeconds();
+
+        if (roundTimerRoutine != null) StopCoroutine(roundTimerRoutine);
+        roundTimerRoutine = StartCoroutine(RoundTimerLoop());
+    }
+
+    IEnumerator RoundTimerLoop()
+    {
+        while (true)
+        {
+            if (!isGameActive) yield break;
+
+            if (IsPlaying && !bossActive)
+            {
+                RoundTimeRemaining -= Time.deltaTime;
+                if (RoundTimeRemaining <= 0f)
+                {
+                    RoundTimeRemaining = 0f;
+                    UpdateUI();
+                    OnRoundTimerExpired();
+                    yield break;
+                }
+
+                UpdateUI();
+            }
+
+            yield return null;
+        }
+    }
+
+    float GetRoundDurationSeconds()
+    {
+        int index = Mathf.Clamp(currentRound - 1, 0, roundDurations.Length - 1);
+        return Mathf.Max(1f, roundDurations[index]);
+    }
+
+    void OnRoundTimerExpired()
+    {
+        if (isBossLevel && currentRound == maxRounds)
+        {
+            SpawnBoss();
+            return;
+        }
+
+        RoundComplete();
+    }
+
+    void ApplyDifficulty()
+    {
+        int levelIndex = Mathf.Max(0, currentLevelNumber - 1);
+        int roundIndex = Mathf.Max(0, currentRound - 1);
+        DifficultyMultiplier = 1f + (levelIndex * difficultyPerLevel) + (roundIndex * difficultyPerRound);
+    }
+
+    void ApplyLevelContentConfig()
+    {
+        LevelContentConfig config = FindFirstObjectByType<LevelContentConfig>();
+        if (config != null) config.Apply();
     }
 
     void AddSurvivalPoints()
@@ -117,28 +205,13 @@ public class GameManager : MonoBehaviour
         // 1. Add Score
         AddScore(scorePerMissile); // Or 100, whatever you prefer
 
-        // 2. Reduce Missile Count
-        currentMissilesLeft--;
-
         UpdateUI();
-
-        // 3. Check for Win
-        if (currentMissilesLeft <= 0 && !bossActive)
-        {
-            if (isBossLevel && currentRound == maxRounds)
-            {
-                SpawnBoss();
-            }
-            else
-            {
-                RoundComplete(); 
-            }
-        }
     }
 
     void SpawnBoss()
     {
         bossActive = true;
+        spawningEnabled = false;
         centerText.text = "WARNING: ENEMY FLAGSHIP APPROACHING";
         centerText.color = Color.red;
 
@@ -168,6 +241,7 @@ public class GameManager : MonoBehaviour
     public void PlayerDied()
     {
         isGameActive = false;
+        spawningEnabled = false;
         currentLives--; // Lose of life
         SetState(GameState.GameOver); // player death
         //centerText.text = "GAME OVER";
@@ -219,6 +293,7 @@ public class GameManager : MonoBehaviour
     void RoundComplete()
     {
         isGameActive = false;
+        spawningEnabled = false;
         scoreKeeper = currentScore; // Save score
         SetState(GameState.GameOver); // Use GameOver state to pause time and show menus
         CancelInvoke("AddSurvivalPoints");
@@ -264,7 +339,10 @@ public class GameManager : MonoBehaviour
     void UpdateUI()
     {
         scoreText.text = "Score: " + currentScore;
-        missileText.text = "Missiles Left: " + Mathf.Max(0, currentMissilesLeft);
+
+        int seconds = Mathf.CeilToInt(RoundTimeRemaining);
+        if (timeText != null) timeText.text = "Time: " + seconds;
+        if (missileText != null) missileText.text = "Time: " + seconds;
 
         if (livesText != null) {
             livesText.text = "Lives: " + currentLives;
@@ -292,8 +370,9 @@ public class GameManager : MonoBehaviour
         //else if (scene.name == "Game") 
         else if (scene.name == "Game" || scene.name.Contains("Level"))
         {
-            isGameActive = true;  // makes sure missile spawner loads
             SetState(GameState.Playing);
+            ApplyLevelContentConfig();
+            StartNewRound();
         }
     }
     void Update()
