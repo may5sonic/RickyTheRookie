@@ -30,6 +30,7 @@ public class jet_mov : MonoBehaviour
     public int health = 3; // --- NEW: Pilot Health ---
 
     public Sprite[] skins; // array of jet skins
+    public SpriteRenderer visualRenderer; // sprite skin visual for jet
 
     //For Animations
     private Rigidbody2D rb;

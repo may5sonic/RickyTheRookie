@@ -351,7 +351,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &209308339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -859,6 +859,7 @@ MonoBehaviour:
   firePoint: {fileID: 1894504022}
   deathEffect: {fileID: 713417785191214622, guid: e9fd406519d94d749b195a039b88e6a7, type: 3}
   health: 3
+  skins: []
 --- !u!50 &616439215
 Rigidbody2D:
   serializedVersion: 5
@@ -1306,6 +1307,7 @@ MonoBehaviour:
   scorePerMissile: 100
   maxRounds: 3
   nextLevelName: Level_3
+  currentLevelNumber: 1
   isGameActive: 1
 --- !u!4 &997575107
 Transform:
