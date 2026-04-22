@@ -1569,7 +1569,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -7443756053782179069, guid: 759b4928b13b3474cbb471d766023d91, type: 3}
+  m_Sprite: {fileID: 7028842072390148906, guid: c0a6819c950e74d2d98dd73bfcecaf4b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1588,8 +1588,8 @@ Transform:
   m_GameObject: {fileID: 1036623625}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 7.37}
-  m_LocalScale: {x: 1.9828616, y: 1.3466064, z: 1}
+  m_LocalPosition: {x: -0.7048, y: 0.1157, z: 7.37}
+  m_LocalScale: {x: 1.8832161, y: 2.4315937, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2563,7 +2563,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -7443756053782179069, guid: 759b4928b13b3474cbb471d766023d91, type: 3}
+  m_Sprite: {fileID: 7028842072390148906, guid: c0a6819c950e74d2d98dd73bfcecaf4b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2582,8 +2582,8 @@ Transform:
   m_GameObject: {fileID: 1850657017}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 26.6, y: 0, z: 7.37}
-  m_LocalScale: {x: 1.9828616, y: 1.3466064, z: 1}
+  m_LocalPosition: {x: 17.2648, y: 0.11, z: 7.37}
+  m_LocalScale: {x: -1.6933494, y: 2.452439, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2891,6 +2891,7 @@ MonoBehaviour:
   scorePerMissile: 100
   maxRounds: 3
   nextLevelName: Level_2
+  currentLevelNumber: 1
   isGameActive: 1
 --- !u!4 &2024301575
 Transform:
@@ -3101,6 +3102,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4693818136561688850, guid: cceba804066fdb74194ae9118c899402, type: 3}
+      propertyPath: skins.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4693818136561688850, guid: cceba804066fdb74194ae9118c899402, type: 3}
+      propertyPath: 'skins.Array.data[0]'
+      value: 
+      objectReference: {fileID: -314854020247288904, guid: 32183c205eac745e1aafcbe725948927, type: 3}
+    - target: {fileID: 4693818136561688850, guid: cceba804066fdb74194ae9118c899402, type: 3}
+      propertyPath: 'skins.Array.data[1]'
+      value: 
+      objectReference: {fileID: 6559430545230835849, guid: e35b72286cf364cb0979957b67b9eca9, type: 3}
+    - target: {fileID: 4693818136561688850, guid: cceba804066fdb74194ae9118c899402, type: 3}
+      propertyPath: 'skins.Array.data[2]'
+      value: 
+      objectReference: {fileID: -1832432948814837980, guid: c0fcd02c1162d4e7cb40cc9f8c6cf560, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

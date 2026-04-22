@@ -29,11 +29,14 @@ public class jet_mov : MonoBehaviour
     public GameObject deathEffect; // Drag your explosion prefab here
     public int health = 3; // --- NEW: Pilot Health ---
 
+    public Sprite[] skins; // array of jet skins
+
     //For Animations
     private Rigidbody2D rb;
     private Animator anim;
 
     private bool hasDoubleFire = false;
+
 
     void Start()
     {
@@ -49,6 +52,16 @@ public class jet_mov : MonoBehaviour
         //For Animations
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+
+        // Grab saved selected skin from player prefs
+        int skinIndex = SelectedSkin.GetSkin();
+
+        Debug.Log("Loaded Skins: " + skinIndex); // debug skin save test
+
+        // Prevent crash if index is out of range
+        skinIndex = Mathf.Clamp(skinIndex, 1, skins.Length);
+        // Apply sprite to player jet
+        GetComponent<SpriteRenderer>().sprite = skins[skinIndex - 1];
     }
 
     void Update()

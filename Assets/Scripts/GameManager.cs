@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
     public int scorePerMissile = 100;
     public int maxRounds = 3; // NEW: Rounds per level
     public string nextLevelName; // NEW: Type "Level_2" (or your scene name) in the Inspector
+    public int currentLevelNumber = 1;
 
     private int currentScore = 0;
     private int currentMissilesLeft;
@@ -241,6 +242,9 @@ public class GameManager : MonoBehaviour
                 centerText.text = "LEVEL COMPLETE!";
                 centerText.color = Color.cyan;
             }
+
+            // unlock skins based on level 
+            PlayerProgress.CompleteLevel(currentLevelNumber);
 
             restartButton.GetComponentInChildren<TextMeshProUGUI>().text = "NEXT SECTOR";
             currentRound = 1; // Reset rounds for the new level
