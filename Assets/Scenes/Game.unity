@@ -2974,8 +2974,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7125f805aed93564ab277e913ca0bd45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  isBossLevel: 0
-  bossPrefab: {fileID: 0}
+  isBossLevel: 1
+  bossPrefab: {fileID: 5498831828232647639, guid: e70fd3559a752a547bf8253ddfd68c0a, type: 3}
   scoreText: {fileID: 1017010556}
   missileText: {fileID: 798395997}
   centerText: {fileID: 1656899829}
