@@ -11,6 +11,12 @@ public class Boss : MonoBehaviour
     public Transform topHangar;
     public Transform bottomHangar;
 
+    [Header("Hover Movement")]
+    public float hoverSpeed = 2f;      // How fast it bobs up and down
+    public float hoverDistance = 4.5f; // How high and low it reaches
+
+    private bool inPosition = false;
+
     void Start()
     {
         InvokeRepeating(nameof(DeployAirplanes), 3f, 4f);
@@ -19,9 +25,21 @@ public class Boss : MonoBehaviour
     void Update()
     {
         // Slowly enter the screen, then stop at X = 6
-        if (transform.position.x > 6f)
+        if (inPosition == false)
         {
             transform.Translate(Vector3.left * speed * Time.deltaTime, Space.World);
+            if (transform.position.x <= 6f)
+            {
+                inPosition = true;
+            }
+        }
+        else
+        {
+            // Smooth wave
+            float newY = Mathf.Sin(Time.time * hoverSpeed) * hoverDistance;
+
+            // apply the Y position while keeping the X and Z the same
+            transform.position = new Vector3(transform.position.x, newY, transform.position.z);
         }
     }
 

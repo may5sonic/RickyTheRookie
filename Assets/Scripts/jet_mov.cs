@@ -59,10 +59,17 @@ public class jet_mov : MonoBehaviour
 
         Debug.Log("Loaded Skins: " + skinIndex); // debug skin save test
 
-        // Prevent crash if index is out of range
-        skinIndex = Mathf.Clamp(skinIndex, 1, skins.Length);
-        // Apply sprite to player jet
-        GetComponent<SpriteRenderer>().sprite = skins[skinIndex - 1];
+        if (skins != null && skins.Length > 0)
+        {
+            // Prevent crash if index is out of range
+            skinIndex = Mathf.Clamp(skinIndex, 1, skins.Length);
+            // Apply sprite to player jet
+            GetComponent<SpriteRenderer>().sprite = skins[skinIndex - 1];
+        }
+        else
+        {
+            Debug.LogWarning("WARNING: The 'skins' array is empty! Please add sprites to the Jet in the Inspector.");
+        }
     }
 
     void Update()
