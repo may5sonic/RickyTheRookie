@@ -3311,7 +3311,7 @@ PrefabInstance:
       objectReference: {fileID: 1044663309}
     - target: {fileID: 4693818136561688850, guid: cceba804066fdb74194ae9118c899402, type: 3}
       propertyPath: skins.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4693818136561688850, guid: cceba804066fdb74194ae9118c899402, type: 3}
       propertyPath: 'skins.Array.data[0]'
@@ -3325,6 +3325,10 @@ PrefabInstance:
       propertyPath: 'skins.Array.data[2]'
       value: 
       objectReference: {fileID: -1832432948814837980, guid: c0fcd02c1162d4e7cb40cc9f8c6cf560, type: 3}
+    - target: {fileID: 4693818136561688850, guid: cceba804066fdb74194ae9118c899402, type: 3}
+      propertyPath: 'skins.Array.data[3]'
+      value: 
+      objectReference: {fileID: 5309547660826426229, guid: 3270a2baf7a444c4b9875eb06cd294e3, type: 3}
     - target: {fileID: 6970943112270649038, guid: cceba804066fdb74194ae9118c899402, type: 3}
       propertyPath: m_Enabled
       value: 0
