@@ -20,6 +20,12 @@ public class GameManager : MonoBehaviour
     public static int currentLives = 3;
     public static int currentRound = 1;
 
+    [Header("Round Timer")]
+    public float[] roundDurations = new float[] { 30f, 45f, 60f };
+    public TextMeshProUGUI timeText;
+    public float RoundTimeRemaining { get; private set; }
+    private Coroutine roundTimerRoutine;
+
     [Header("Boss Settings")]
     public bool isBossLevel = false; // Check this ONLY in the Level_3 Inspector!
     public GameObject bossPrefab;
@@ -67,16 +73,78 @@ public class GameManager : MonoBehaviour
     {
         currentScore = scoreKeeper; // restores score
 
-        //currentMissilesLeft = missilesToWin;
-        currentMissilesLeft = missilesToWin + (currentRound * 2);
+        if (timeText == null)
+        {
+            GameObject foundTimeText = GameObject.Find("TimeText");
+            if (foundTimeText != null) timeText = foundTimeText.GetComponent<TextMeshProUGUI>();
+        }
 
         // loads saved highscore
         highScore = PlayerPrefs.GetInt("HighScore", 0);
+
+        StartNewRound();
 
         UpdateUI();
 
         // Start adding survival points every 1 second
         InvokeRepeating("AddSurvivalPoints", 1f, 1f);
+    }
+
+    void StartNewRound()
+    {
+        isGameActive = true;
+        bossActive = false;
+
+        currentMissilesLeft = missilesToWin + (currentRound * 2);
+        RoundTimeRemaining = GetRoundDurationSeconds();
+
+        if (roundTimerRoutine != null) StopCoroutine(roundTimerRoutine);
+        roundTimerRoutine = StartCoroutine(RoundTimerLoop());
+    }
+
+    IEnumerator RoundTimerLoop()
+    {
+        while (true)
+        {
+            if (!isGameActive) yield break;
+
+            if (CurrentState == GameState.Playing && !bossActive)
+            {
+                RoundTimeRemaining -= Time.deltaTime;
+                if (RoundTimeRemaining <= 0f)
+                {
+                    RoundTimeRemaining = 0f;
+                    UpdateUI();
+                    OnRoundTimerExpired();
+                    yield break;
+                }
+
+                UpdateUI();
+            }
+
+            yield return null;
+        }
+    }
+
+    float GetRoundDurationSeconds()
+    {
+        if (roundDurations == null || roundDurations.Length == 0) return 30f;
+
+        int index = Mathf.Clamp(currentRound - 1, 0, roundDurations.Length - 1);
+        return Mathf.Max(1f, roundDurations[index]);
+    }
+
+    void OnRoundTimerExpired()
+    {
+        if (!isGameActive) return;
+
+        if (isBossLevel && currentRound == maxRounds)
+        {
+            SpawnBoss();
+            return;
+        }
+
+        RoundComplete();
     }
 
     void AddSurvivalPoints()
@@ -175,6 +243,12 @@ public class GameManager : MonoBehaviour
         //centerText.color = Color.red;
         CancelInvoke("AddSurvivalPoints"); // Stop giving points
 
+        if (roundTimerRoutine != null)
+        {
+            StopCoroutine(roundTimerRoutine);
+            roundTimerRoutine = null;
+        }
+
         restartButton.SetActive(true);
         mainmenuButton.SetActive(true);
 
@@ -224,6 +298,12 @@ public class GameManager : MonoBehaviour
         SetState(GameState.GameOver); // Use GameOver state to pause time and show menus
         CancelInvoke("AddSurvivalPoints");
 
+        if (roundTimerRoutine != null)
+        {
+            StopCoroutine(roundTimerRoutine);
+            roundTimerRoutine = null;
+        }
+
         restartButton.SetActive(true);
         mainmenuButton.SetActive(true);
 
@@ -269,6 +349,12 @@ public class GameManager : MonoBehaviour
     {
         scoreText.text = "Score: " + currentScore;
         missileText.text = "Missiles Left: " + Mathf.Max(0, currentMissilesLeft);
+
+        if (timeText != null)
+        {
+            int seconds = Mathf.CeilToInt(RoundTimeRemaining);
+            timeText.text = "Time: " + seconds;
+        }
 
         if (livesText != null) {
             livesText.text = "Lives: " + currentLives;
