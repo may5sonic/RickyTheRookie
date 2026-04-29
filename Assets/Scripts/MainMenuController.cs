@@ -22,7 +22,7 @@ public class MainMenuController : MonoBehaviour
         GameManager.scoreKeeper = 0;
         GameManager.currentLives = 3;
         GameManager.currentRound = 1;
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("Level1Intro");
     }
 
     public void OpenSettings()
