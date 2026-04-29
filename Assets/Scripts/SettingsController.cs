@@ -67,6 +67,9 @@ public class SettingsController : MonoBehaviour
 
     public void BackToMenu()
     {
+        GameManager.scoreKeeper = 0;
+        GameManager.currentLives = 3;
+        GameManager.currentRound = 1;
         SceneManager.LoadScene("MainMenu");
     }
 }

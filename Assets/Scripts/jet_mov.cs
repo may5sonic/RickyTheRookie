@@ -21,6 +21,10 @@ public class jet_mov : MonoBehaviour
     public float speed = 5f;
     //public float rotationSpeed = 720f; // How fast it turns (degrees per second)
 
+    [Header("Afterburner")]
+    public TrailRenderer afterburnerTrail;
+    public float afterburnerDeadZone = 0.1f;
+
     [Header("Shooting Settings")]
     public GameObject bulletPrefab; // Drag your Bullet Prefab here
     public Transform firePoint;     // Drag your FirePoint object here
@@ -78,6 +82,16 @@ public class jet_mov : MonoBehaviour
 
         float moveX = Input.GetAxis("Horizontal");
         float moveY = Input.GetAxis("Vertical");
+
+        if (afterburnerTrail != null)
+        {
+            bool afterburnerActive =
+                Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow) ||
+                Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow) ||
+                Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow);
+
+            afterburnerTrail.emitting = afterburnerActive;
+        }
 
         //Vector3 movement = new Vector3 (moveX, moveY, 0f);
         Vector3 movement = new Vector3(moveX, moveY, 0f).normalized;

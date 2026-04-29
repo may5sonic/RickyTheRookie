@@ -79,6 +79,12 @@ public class GameManager : MonoBehaviour
             if (foundTimeText != null) timeText = foundTimeText.GetComponent<TextMeshProUGUI>();
         }
 
+        if (highScoreText == null)
+        {
+            GameObject foundHighScoreText = GameObject.Find("HighScoreText");
+            if (foundHighScoreText != null) highScoreText = foundHighScoreText.GetComponent<TextMeshProUGUI>();
+        }
+
         // loads saved highscore
         highScore = PlayerPrefs.GetInt("HighScore", 0);
 
@@ -145,6 +151,33 @@ public class GameManager : MonoBehaviour
         }
 
         RoundComplete();
+    }
+
+    void StopSpawners()
+    {
+        foreach (missile_spawn spawner in FindObjectsByType<missile_spawn>(FindObjectsSortMode.None))
+        {
+            spawner.CancelInvoke();
+            spawner.enabled = false;
+        }
+
+        foreach (Cloud_Spawn spawner in FindObjectsByType<Cloud_Spawn>(FindObjectsSortMode.None))
+        {
+            spawner.CancelInvoke();
+            spawner.enabled = false;
+        }
+
+        foreach (Powerup_Spawn spawner in FindObjectsByType<Powerup_Spawn>(FindObjectsSortMode.None))
+        {
+            spawner.CancelInvoke();
+            spawner.enabled = false;
+        }
+
+        foreach (Airplane_Spawn spawner in FindObjectsByType<Airplane_Spawn>(FindObjectsSortMode.None))
+        {
+            spawner.CancelInvoke();
+            spawner.enabled = false;
+        }
     }
 
     void AddSurvivalPoints()
@@ -249,6 +282,8 @@ public class GameManager : MonoBehaviour
             roundTimerRoutine = null;
         }
 
+        StopSpawners();
+
         restartButton.SetActive(true);
         mainmenuButton.SetActive(true);
 
@@ -303,6 +338,8 @@ public class GameManager : MonoBehaviour
             StopCoroutine(roundTimerRoutine);
             roundTimerRoutine = null;
         }
+
+        StopSpawners();
 
         restartButton.SetActive(true);
         mainmenuButton.SetActive(true);

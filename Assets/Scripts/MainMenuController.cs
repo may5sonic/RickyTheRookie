@@ -19,6 +19,9 @@ public class MainMenuController : MonoBehaviour
 
     public void PlayGame()
     {
+        GameManager.scoreKeeper = 0;
+        GameManager.currentLives = 3;
+        GameManager.currentRound = 1;
         SceneManager.LoadScene("Game");
     }
 

@@ -2039,6 +2039,11 @@ Transform:
   - {fileID: 1718503567}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!96 &1323310307 stripped
+TrailRenderer:
+  m_CorrespondingSourceObject: {fileID: 5948089761271955991, guid: cceba804066fdb74194ae9118c899402, type: 3}
+  m_PrefabInstance: {fileID: 1955337223144170734}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1400760375
 GameObject:
   m_ObjectHideFlags: 0
@@ -3401,6 +3406,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1554712908567187609, guid: cceba804066fdb74194ae9118c899402, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1554712908567187609, guid: cceba804066fdb74194ae9118c899402, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.5
       objectReference: {fileID: 0}
@@ -3456,6 +3465,10 @@ PrefabInstance:
       propertyPath: visualRenderer
       value: 
       objectReference: {fileID: 1044663309}
+    - target: {fileID: 4693818136561688850, guid: cceba804066fdb74194ae9118c899402, type: 3}
+      propertyPath: afterburnerTrail
+      value: 
+      objectReference: {fileID: 1323310307}
     - target: {fileID: 4693818136561688850, guid: cceba804066fdb74194ae9118c899402, type: 3}
       propertyPath: skins.Array.size
       value: 4
