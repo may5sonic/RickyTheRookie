@@ -12,7 +12,7 @@ public class SkinButtonUI : MonoBehaviour
         button = GetComponent<Button>();
     }
     
-    void Start()
+    void OnEnable() 
     {
         UpdateUI();
     }

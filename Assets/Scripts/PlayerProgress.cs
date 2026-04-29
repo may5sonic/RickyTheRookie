@@ -16,4 +16,12 @@ using UnityEngine;
                 PlayerPrefs.Save();
             }
         }
+        // boss skin unlock
+        public static void UnlockBossSkin() {
+            PlayerPrefs.SetInt("BossSkinUnlocked", 1);
+            PlayerPrefs.Save();
+        }
+        public static bool IsBossSkinUnlocked() {
+            return PlayerPrefs.GetInt("BossSkinUnlocked", 0) == 1;
+        }
     }

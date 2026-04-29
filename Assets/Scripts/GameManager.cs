@@ -264,6 +264,7 @@ public class GameManager : MonoBehaviour
     {
         AddScore(1000); // Big point bonus
         bossActive = false;
+        PlayerProgress.UnlockBossSkin(); // call when boss dies
         RoundComplete(); // This will trigger the "Level Complete" screen
     }
 
