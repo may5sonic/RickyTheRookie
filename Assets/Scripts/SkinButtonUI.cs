@@ -10,6 +10,9 @@ public class SkinButtonUI : MonoBehaviour
 
     void Awake() {
         button = GetComponent<Button>();
+
+        // Tell the button what to do when clicked
+        button.onClick.AddListener(EquipThisSkin);
     }
     
     void OnEnable() 
@@ -22,9 +25,24 @@ public class SkinButtonUI : MonoBehaviour
         bool unlocked = SkinManager.IsSkinUnlocked(skinIndex);
 
         // show locked if not unlocked
-        lockIcon.SetActive(!unlocked);
+        if (lockIcon != null)
+        {
+            lockIcon.SetActive(!unlocked);
+        }
 
         // disable click if locked
-        button.interactable = unlocked;
+        if (button != null)
+        {
+            button.interactable = unlocked;
+        }
+    }
+
+    // The function that actually saves your choice
+    void EquipThisSkin()
+    {
+        // Tells your SelectedSkin script to save this specific index
+        SelectedSkin.SetSkin(skinIndex);
+
+        Debug.Log("Successfully equipped Skin Index: " + skinIndex);
     }
 }

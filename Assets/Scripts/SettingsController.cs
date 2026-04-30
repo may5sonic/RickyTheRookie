@@ -5,6 +5,9 @@ using TMPro;
 
 public class SettingsController : MonoBehaviour
 {
+    [Header("UI Panels")]
+    public GameObject customizationPanel;
+
     [Header("Player Settings")]
     public Slider speedSlider;
     public TextMeshProUGUI speedValueText;

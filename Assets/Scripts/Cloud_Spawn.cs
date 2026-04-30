@@ -29,7 +29,7 @@ public class Cloud_Spawn : MonoBehaviour
         // 1. Check if game is active
         if (GameManager.instance.isGameActive == false)
         {
-            CancelInvoke(nameof(SpawnCloud)); 
+            //CancelInvoke(nameof(SpawnCloud)); 
             return;
         }
 

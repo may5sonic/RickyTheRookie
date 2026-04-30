@@ -34,7 +34,7 @@ public class missile_spawn : MonoBehaviour
 
         if (GameManager.instance.isGameActive == false)
         {
-            CancelInvoke(nameof(SpawnMissile));
+            //CancelInvoke(nameof(SpawnMissile));
             return;
         }
 

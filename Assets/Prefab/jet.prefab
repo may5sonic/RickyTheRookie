@@ -320,11 +320,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bf91a0b98d954272b103083bfca4fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::jet_mov
+  isInvincible: 0
+  invincibilityDuration: 2
+  flickerSpeed: 0.1
   speed: 6.5
+  afterburnerTrail: {fileID: 0}
+  afterburnerDeadZone: 0.1
   bulletPrefab: {fileID: 165552127691081962, guid: ab7483ac344f5774fa73d7559e907ec5, type: 3}
   firePoint: {fileID: 8561392219370856837}
   deathEffect: {fileID: 713417785191214622, guid: e9fd406519d94d749b195a039b88e6a7, type: 3}
   health: 3
+  skins:
+  - {fileID: -314854020247288904, guid: 32183c205eac745e1aafcbe725948927, type: 3}
+  - {fileID: 6559430545230835849, guid: e35b72286cf364cb0979957b67b9eca9, type: 3}
+  - {fileID: -1832432948814837980, guid: c0fcd02c1162d4e7cb40cc9f8c6cf560, type: 3}
+  - {fileID: 5309547660826426229, guid: 3270a2baf7a444c4b9875eb06cd294e3, type: 3}
+  visualRenderer: {fileID: 0}
 --- !u!114 &1459847162777821555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -392,7 +403,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3821907592361295311}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 445a3d10036e94aafa9209a494606667, type: 2}
   m_CullingMode: 0

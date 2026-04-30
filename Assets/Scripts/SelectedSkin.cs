@@ -1,13 +1,17 @@
 using UnityEngine;
 
-public static class SelectedSkin {
-    // saves the skin index based on what the player selected on menu
-  public static void SetSkin(int index) {
-    PlayerPrefs.SetInt("SelectedSkin", index);
+public static class SelectedSkin 
+{
+  // The Jet uses this to read the skin
+  public static int GetSkin()
+  {
+    return PlayerPrefs.GetInt("SelectedSkin", 1); // Default to 1 if nothing saved yet
   }
-  // gets the skin currently selected
-  // 1 is default
-  public static int GetSkin() {
-    return PlayerPrefs.GetInt("SelectedSkin", 1);
+
+  // The Button uses this to save the skin
+  public static void SetSkin(int index)
+  {
+    PlayerPrefs.SetInt("SelectedSkin", index);
+    PlayerPrefs.Save();
   }
 }

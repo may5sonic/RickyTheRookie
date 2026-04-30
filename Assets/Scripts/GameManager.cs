@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour
 
     public static event Action<GameState> OnGameStateChanged;
 
+    [Header("Player Settings")]
+    public GameObject playerPrefab; // Drag your Jet Prefab here in the Inspector!
+    public Vector3 playerSpawnPosition = new Vector3(-6f, 0f, 0f); // Where the jet starts
 
     public static int scoreKeeper = 0;
     public static int currentLives = 3;
@@ -283,7 +286,7 @@ public class GameManager : MonoBehaviour
             roundTimerRoutine = null;
         }
 
-        StopSpawners();
+        //StopSpawners();
 
         restartButton.SetActive(true);
         mainmenuButton.SetActive(true);
@@ -378,9 +381,32 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene(nextLevelName);
         }
+        else if (buttonAction == "DEPLOY BACKUP")
+        {
+            // Hide the menus
+            restartButton.SetActive(false);
+            mainmenuButton.SetActive(false);
+            centerText.text = "";
+
+            // Spawn a new jet into the current fight
+            Instantiate(playerPrefab, playerSpawnPosition, Quaternion.identity);
+
+            // Resume the game logic
+            isGameActive = true;
+            SetState(GameState.Playing);
+
+            // Start the point timer again
+            InvokeRepeating("AddSurvivalPoints", 1f, 1f);
+
+            // Unfreeze the round timer
+            roundTimerRoutine = StartCoroutine(RoundTimerLoop());
+        }
         else
+        {
         // This reloads the current scene (resets everything)
+        // "RESTART CAMPAIGN" still fully reloads the scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 
     void UpdateUI()
@@ -441,7 +467,7 @@ public void SetState(GameState newState)
         // Control time based on state
         Time.timeScale = (newState == GameState.Paused || newState == GameState.GameOver) ? 0f : 1f;
 
-        Debug.Log("State changed to: " + newState);
+        //Debug.Log("State changed to: " + newState);
 
         OnGameStateChanged?.Invoke(newState);
     }
@@ -451,6 +477,11 @@ public void SetState(GameState newState)
 
     public void GoToMainMenu()
     {
+        // NEW: SAVE BEFORE LEAVING
+        // We save the exact name of the scene we are currently playing in
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        GameSettings.SaveProgress(currentSceneName, currentRound, currentLives, scoreKeeper);
+
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
     }

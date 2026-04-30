@@ -29,7 +29,7 @@ public class Airplane_Spawn : MonoBehaviour
         // 1. Check if game is active
         if (GameManager.instance.isGameActive == false)
         {
-            CancelInvoke(nameof(SpawnAirplane)); 
+            //CancelInvoke(nameof(SpawnAirplane)); 
             return;
         }
 

@@ -17,6 +17,13 @@ public class jet_mov : MonoBehaviour
     //     }
     // }   
 
+    // --- ADD THESE VARIABLES AT THE TOP ---
+    [Header("Respawn & Invincibility")]
+    public bool isInvincible = false;
+    public float invincibilityDuration = 2f; // How long you are safe
+    public float flickerSpeed = 0.1f;        // How fast the jet blinks
+    // --------------------------------------
+
     [Header("Movement Settings")]
     public float speed = 5f;
     //public float rotationSpeed = 720f; // How fast it turns (degrees per second)
@@ -56,7 +63,7 @@ public class jet_mov : MonoBehaviour
 
         //For Animations
         rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
+        //anim = GetComponent<Animator>(); we needed to disable this because not all jets have animators, but you can re-enable it if you add animators to all your jet prefabs
 
         // Grab saved selected skin from player prefs
         int skinIndex = SelectedSkin.GetSkin();
@@ -74,6 +81,9 @@ public class jet_mov : MonoBehaviour
         {
             Debug.LogWarning("WARNING: The 'skins' array is empty! Please add sprites to the Jet in the Inspector.");
         }
+
+        // Trigger Invincibility
+        StartCoroutine(InvincibilityRoutine());
     }
 
     void Update()
@@ -120,15 +130,15 @@ public class jet_mov : MonoBehaviour
         }
 
         //For Animations 
-        float vertical = Input.GetAxis("Vertical");
+        //float vertical = Input.GetAxis("Vertical");
         // dead zone
-        if (Mathf.Abs(vertical) < 0.1f) vertical = 0;
+        //if (Mathf.Abs(vertical) < 0.1f) vertical = 0;
 
         // movement
-        rb.linearVelocity = new Vector2(0, vertical * speed);
+        //rb.linearVelocity = new Vector2(0, vertical * speed);
 
         // animation
-        anim.SetFloat("Vertical", vertical);
+        //anim.SetFloat("Vertical", vertical);
         
     }
 
@@ -199,6 +209,9 @@ public class jet_mov : MonoBehaviour
 
     void TakeDamage(GameObject hazard)
     {
+        // New: Block Damage if invincible
+        if (isInvincible) return;
+
         health--; 
         Destroy(hazard); // Destroy the missile that hit us
 
@@ -263,4 +276,36 @@ public class jet_mov : MonoBehaviour
         transform.position = pos;
     }
 
+    private IEnumerator InvincibilityRoutine()
+    {
+        isInvincible = true;
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+
+        float elapsedTime = 0f;
+
+        // Loop until the duration is up
+        while (elapsedTime < invincibilityDuration)
+        {
+            if (sr != null)
+            {
+                // Toggle the alpha (transparency) between 30% and 100%
+                Color c = sr.color;
+                c.a = (c.a == 1f) ? 0.3f : 1f; 
+                sr.color = c;
+            }
+            // Wait a fraction of a second, then repeat
+            yield return new WaitForSeconds(flickerSpeed);
+            elapsedTime += flickerSpeed;
+        }
+        // Timer is up! Make sure the jet is fully solid again
+        if (sr != null)
+        {
+            Color c = sr.color;
+            c.a = 1f;
+            sr.color = c;
+        }
+
+        // Turn off invincibility armor
+        isInvincible = false;
+    }
 }

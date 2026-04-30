@@ -7,12 +7,12 @@ public class ScrollBackground : MonoBehaviour
     public float speed = 2f;
     
     private float width;
-    // private Vector3 startPosition;
+    private Vector3 startPosition;
 
     void Start()
     {
         // Remember where this specific image started
-        // startPosition = transform.position;
+        startPosition = transform.position;
         
         // Automatically measure how wide the image is
         width = GetComponent<SpriteRenderer>().bounds.size.x;
@@ -21,12 +21,17 @@ public class ScrollBackground : MonoBehaviour
     void Update()
     {
 
-        transform.position += Vector3.left * speed * Time.deltaTime;
+        // Mathf.Repeat creates a perfect, unbroken loop from 0 to 'width'
+        float loopPosition = Mathf.Repeat(Time.time * speed, width);
+
+        // Apply that loop to the start position. No drifting allowed!
+        transform.position = startPosition + Vector3.left * loopPosition;
+        //transform.position += Vector3.left * speed * Time.deltaTime;
 
         // when completely off screen move to the right
-        if (transform.position.x < -width) {
-            transform.position += new Vector3(width * 2f, 0, 0);
-        }
+       // if (transform.position.x < -width) {
+        //    transform.position += new Vector3(width * 2f, 0, 0);
+        //}
 
         // Mathf.Repeat creates a continuous loop from 0 to 'width'
         // Time.time ensures the movement is perfectly smooth
