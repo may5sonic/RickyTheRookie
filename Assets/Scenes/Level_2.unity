@@ -1837,7 +1837,7 @@ MonoBehaviour:
   scorePerMissile: 100
   maxRounds: 3
   nextLevelName: Level_3
-  currentLevelNumber: 1
+  currentLevelNumber: 2
   isGameActive: 1
 --- !u!4 &997575107
 Transform:
@@ -2740,9 +2740,9 @@ MonoBehaviour:
   minY: -4
   maxY: 4
   maxRotationAngle: 10
-  baseSpawnRate: 4
-  minSpawnRate: 0.8
-  speedIncreasePerRound: 0.4
+  baseSpawnRate: 6
+  minSpawnRate: 1
+  speedIncreasePerRound: 0.7
 --- !u!4 &1629103731
 Transform:
   m_ObjectHideFlags: 0
@@ -3295,7 +3295,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 1.3482}
+  m_AnchoredPosition: {x: 0, y: 214}
   m_SizeDelta: {x: 500, y: 97.3036}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1742651479
@@ -3330,9 +3330,9 @@ MonoBehaviour:
   cloudPrefab: {fileID: 4556868882300345297, guid: ee9403a7809ea1e499e53f4adfa32b9b, type: 3}
   minY: -4
   maxY: 4
-  baseSpawnRate: 4
+  baseSpawnRate: 5
   minSpawnRate: 1.7
-  speedIncreasePerRound: 0.7
+  speedIncreasePerRound: 0.9
 --- !u!4 &1742651481
 Transform:
   m_ObjectHideFlags: 0
@@ -3485,9 +3485,9 @@ MonoBehaviour:
   airplanePrefab: {fileID: 5498831828232647639, guid: 5509a1127ebaf744a8c7be3702db4d54, type: 3}
   minY: -4
   maxY: 4
-  baseSpawnRate: 4
-  minSpawnRate: 1.5
-  speedIncreasePerRound: 0.5
+  baseSpawnRate: 10
+  minSpawnRate: 2.5
+  speedIncreasePerRound: 0.7
 --- !u!4 &1807214573
 Transform:
   m_ObjectHideFlags: 0
