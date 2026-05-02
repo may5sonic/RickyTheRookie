@@ -2533,9 +2533,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f26aa911982e54da49bd822abe209aa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::missile_spawn
-  missilePrefab: {fileID: 5750486056423510430, guid: d6e563f94d9b14b02b4fa8da5f340b93, type: 3}
+  regularMissilePrefab: {fileID: 5750486056423510430, guid: d6e563f94d9b14b02b4fa8da5f340b93, type: 3}
+  homingMissilePrefab: {fileID: 5750486056423510430, guid: a227fff5db7f81b4cb28bb647f296bf8, type: 3}
   minY: -4
   maxY: 4
+  homingChance: 20
   maxRotationAngle: 10
   baseSpawnRate: 2
   minSpawnRate: 0.4

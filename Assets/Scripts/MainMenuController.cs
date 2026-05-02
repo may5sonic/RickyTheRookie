@@ -69,11 +69,20 @@ public class MainMenuController : MonoBehaviour
 
     void Update()
     {
-        // Secret developer button to wipe saves during testing
+        // Secret developer button for presentation day
         if (Input.GetKeyDown(KeyCode.L))
         {
-            GameSettings.ClearProgress();
-            Debug.Log("SAVE WIPED! Next time you press Play, the Intro will run.");
+            PlayerPrefs.DeleteAll();
+            PlayerPrefs.Save();
+            
+            GameManager.scoreKeeper = 0;
+            GameManager.currentLives = 3;
+            GameManager.currentRound = 1;
+            
+            // Reload the menu to refresh any locked/unlocked UI buttons
+            SceneManager.LoadScene("MainMenu"); 
+            
+            Debug.Log("SHOWCASE WIPE COMPLETE.");
         }
     }
 }

@@ -458,6 +458,27 @@ public class GameManager : MonoBehaviour
             if (CurrentState == GameState.Playing) PauseGame();
             else if (CurrentState == GameState.Paused) ResumeGame();
         }
+
+        // Showcase Hard Reset
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            // Wipe all progress and return to main menu
+            PlayerPrefs.DeleteAll();
+            PlayerPrefs.Save();
+
+            // Reset the live session variables
+            scoreKeeper = 0;
+            currentLives = 3;
+            currentRound = 1;
+
+            // Unpause the game (in case they pressed L while on the Game Over screen)
+            Time.timeScale = 1f;
+
+            // Force the game to reload the Main Menu immediately
+            SceneManager.LoadScene("MainMenu");
+
+            Debug.Log("SHOWCASE WIPE COMPLETE. Game completely reset.");
+        }
     }
 
 public void SetState(GameState newState)
