@@ -10,6 +10,7 @@ TagManager:
   - airplane
   - boss
   - powerup
+  - coin
   layers:
   - Default
   - TransparentFX
