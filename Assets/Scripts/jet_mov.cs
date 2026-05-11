@@ -65,6 +65,17 @@ public class jet_mov : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         //anim = GetComponent<Animator>(); we needed to disable this because not all jets have animators, but you can re-enable it if you add animators to all your jet prefabs
 
+        if (afterburnerTrail == null)
+        {
+            afterburnerTrail = GetComponentInChildren<TrailRenderer>();
+        }
+
+        if (afterburnerTrail != null)
+        {
+            afterburnerTrail.emitting = false;
+            afterburnerTrail.Clear();
+        }
+
         // Grab saved selected skin from player prefs
         int skinIndex = SelectedSkin.GetSkin();
 
@@ -95,12 +106,15 @@ public class jet_mov : MonoBehaviour
 
         if (afterburnerTrail != null)
         {
-            bool afterburnerActive =
-                Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow) ||
-                Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow) ||
-                Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow);
+            bool forwardPressed = Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow);
+            bool movingForward = moveX > afterburnerDeadZone;
 
-            afterburnerTrail.emitting = afterburnerActive;
+            bool afterburnerActive = forwardPressed || movingForward;
+            if (afterburnerTrail.emitting != afterburnerActive)
+            {
+                afterburnerTrail.emitting = afterburnerActive;
+                if (!afterburnerActive) afterburnerTrail.Clear();
+            }
         }
 
         //Vector3 movement = new Vector3 (moveX, moveY, 0f);
