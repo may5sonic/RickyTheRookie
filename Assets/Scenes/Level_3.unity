@@ -2494,7 +2494,7 @@ Transform:
   m_GameObject: {fileID: 1316764256}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -75.69, y: 0, z: 7.37}
+  m_LocalPosition: {x: -37.619057, y: 0, z: 7.37}
   m_LocalScale: {x: 1.9828616, y: 1.3466064, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2886,7 +2886,7 @@ MonoBehaviour:
   homingMissilePrefab: {fileID: 5750486056423510430, guid: a227fff5db7f81b4cb28bb647f296bf8, type: 3}
   minY: -4
   maxY: 4
-  homingChance: 40
+  homingChance: 45
   maxRotationAngle: 20
   baseSpawnRate: 0.9
   minSpawnRate: 0.2
@@ -3412,7 +3412,7 @@ Transform:
   m_GameObject: {fileID: 1753956960}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -37.619, y: 0, z: 7.37}
+  m_LocalPosition: {x: -75.69, y: 0, z: 7.37}
   m_LocalScale: {x: 1.9828616, y: 1.3466064, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
