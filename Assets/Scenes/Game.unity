@@ -972,9 +972,9 @@ MonoBehaviour:
   airplanePrefab: {fileID: 5498831828232647639, guid: 5509a1127ebaf744a8c7be3702db4d54, type: 3}
   minY: -4
   maxY: 4
-  baseSpawnRate: 4
-  minSpawnRate: 1.5
-  speedIncreasePerRound: 0.5
+  baseSpawnRate: 4.2
+  minSpawnRate: 2.2
+  speedIncreasePerRound: 0.6
 --- !u!4 &652584433
 Transform:
   m_ObjectHideFlags: 0
@@ -1691,9 +1691,9 @@ MonoBehaviour:
   coinPrefab: {fileID: 8158892057143989510, guid: a9409234286864e8ab2734fb8883eb47, type: 3}
   minY: -4
   maxY: 4
-  baseSpawnRate: 3
-  minSpawnRate: 1.2
-  speedIncreasePerRound: 0.3
+  baseSpawnRate: 3.8
+  minSpawnRate: 2.8
+  speedIncreasePerRound: 0.25
 --- !u!1 &1130702226
 GameObject:
   m_ObjectHideFlags: 0
@@ -2321,9 +2321,9 @@ MonoBehaviour:
   cloudPrefab: {fileID: 4556868882300345297, guid: ee9403a7809ea1e499e53f4adfa32b9b, type: 3}
   minY: -4
   maxY: 4
-  baseSpawnRate: 4
-  minSpawnRate: 1.5
-  speedIncreasePerRound: 0.5
+  baseSpawnRate: 3.8
+  minSpawnRate: 2.2
+  speedIncreasePerRound: 0.25
 --- !u!4 &1653771886
 Transform:
   m_ObjectHideFlags: 0
@@ -2589,10 +2589,10 @@ MonoBehaviour:
   minY: -4
   maxY: 4
   homingChance: 20
-  maxRotationAngle: 10
-  baseSpawnRate: 2
-  minSpawnRate: 0.4
-  speedIncreasePerRound: 0.3
+  maxRotationAngle: 12
+  baseSpawnRate: 1.8
+  minSpawnRate: 0.6
+  speedIncreasePerRound: 0.45
 --- !u!4 &1718503567
 Transform:
   m_ObjectHideFlags: 0
@@ -3052,9 +3052,9 @@ MonoBehaviour:
   cloudPrefab: {fileID: 8371560900374259360, guid: d1292c0bee5be0d4a926012a92eef9aa, type: 3}
   minY: -4
   maxY: 4
-  baseSpawnRate: 15
-  minSpawnRate: 15
-  speedIncreasePerRound: 0.5
+  baseSpawnRate: 5
+  minSpawnRate: 4
+  speedIncreasePerRound: 0.2
 --- !u!4 &1898816552
 Transform:
   m_ObjectHideFlags: 0
@@ -3317,7 +3317,7 @@ MonoBehaviour:
   - 30
   - 45
   timeText: {fileID: 1174928954}
-  isBossLevel: 1
+  isBossLevel: 0
   bossPrefab: {fileID: 5498831828232647639, guid: e70fd3559a752a547bf8253ddfd68c0a, type: 3}
   scoreText: {fileID: 1017010556}
   missileText: {fileID: 798395997}

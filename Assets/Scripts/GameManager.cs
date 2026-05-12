@@ -156,32 +156,32 @@ public class GameManager : MonoBehaviour
         RoundComplete();
     }
 
-    void StopSpawners()
-    {
-        foreach (missile_spawn spawner in FindObjectsByType<missile_spawn>(FindObjectsSortMode.None))
-        {
-            spawner.CancelInvoke();
-            spawner.enabled = false;
-        }
+    // void StopSpawners()
+    // {
+    //     foreach (missile_spawn spawner in FindObjectsByType<missile_spawn>(FindObjectsSortMode.None))
+    //     {
+    //         spawner.CancelInvoke();
+    //         spawner.enabled = false;
+    //     }
 
-        foreach (Cloud_Spawn spawner in FindObjectsByType<Cloud_Spawn>(FindObjectsSortMode.None))
-        {
-            spawner.CancelInvoke();
-            spawner.enabled = false;
-        }
+    //     foreach (Cloud_Spawn spawner in FindObjectsByType<Cloud_Spawn>(FindObjectsSortMode.None))
+    //     {
+    //         spawner.CancelInvoke();
+    //         spawner.enabled = false;
+    //     }
 
-        foreach (Powerup_Spawn spawner in FindObjectsByType<Powerup_Spawn>(FindObjectsSortMode.None))
-        {
-            spawner.CancelInvoke();
-            spawner.enabled = false;
-        }
+    //     foreach (Powerup_Spawn spawner in FindObjectsByType<Powerup_Spawn>(FindObjectsSortMode.None))
+    //     {
+    //         spawner.CancelInvoke();
+    //         spawner.enabled = false;
+    //     }
 
-        foreach (Airplane_Spawn spawner in FindObjectsByType<Airplane_Spawn>(FindObjectsSortMode.None))
-        {
-            spawner.CancelInvoke();
-            spawner.enabled = false;
-        }
-    }
+    //     foreach (Airplane_Spawn spawner in FindObjectsByType<Airplane_Spawn>(FindObjectsSortMode.None))
+    //     {
+    //         spawner.CancelInvoke();
+    //         spawner.enabled = false;
+    //     }
+    // }
 
     void AddSurvivalPoints()
     {
@@ -343,7 +343,7 @@ public class GameManager : MonoBehaviour
             roundTimerRoutine = null;
         }
 
-        StopSpawners();
+        // StopSpawners();
 
         restartButton.SetActive(true);
         mainmenuButton.SetActive(true);
@@ -400,6 +400,17 @@ public class GameManager : MonoBehaviour
 
             // Unfreeze the round timer
             roundTimerRoutine = StartCoroutine(RoundTimerLoop());
+        }
+        else if (buttonAction == "RESTART CAMPAIGN") {
+            // reset all progress
+            scoreKeeper = 0;
+            currentLives = 3;
+            currentRound = 1;
+
+            Time.timeScale = 1f;
+            
+            // send back to level 1
+            SceneManager.LoadScene("Game");
         }
         else
         {
@@ -510,6 +521,6 @@ public void SetState(GameState newState)
     public void StartGame()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("Level1Intro");
+        SceneManager.LoadScene("Game");
     }
 }

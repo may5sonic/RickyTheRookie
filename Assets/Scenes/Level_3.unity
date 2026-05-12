@@ -1002,9 +1002,9 @@ MonoBehaviour:
   cloudPrefab: {fileID: 4556868882300345297, guid: ee9403a7809ea1e499e53f4adfa32b9b, type: 3}
   minY: -4
   maxY: 4
-  baseSpawnRate: 5
+  baseSpawnRate: 3.2
   minSpawnRate: 1.8
-  speedIncreasePerRound: 0.8
+  speedIncreasePerRound: 0.3
 --- !u!4 &515877325
 Transform:
   m_ObjectHideFlags: 0
@@ -1153,6 +1153,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 536106638}
   m_CullTransparentMesh: 1
+--- !u!1 &540155324
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 540155325}
+  - component: {fileID: 540155326}
+  m_Layer: 0
+  m_Name: CoinSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &540155325
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 540155324}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -79.3797, y: -0.42486572, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 683264285}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &540155326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 540155324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 271f4b20a4d42483584c32cfae400930, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Coin_Spawn
+  coinPrefab: {fileID: 8158892057143989510, guid: a9409234286864e8ab2734fb8883eb47, type: 3}
+  minY: -4
+  maxY: 4
+  baseSpawnRate: 2
+  minSpawnRate: 1.5
+  speedIncreasePerRound: 0.3
 --- !u!1 &683264284
 GameObject:
   m_ObjectHideFlags: 0
@@ -1182,6 +1232,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 540155325}
   - {fileID: 817088097}
   - {fileID: 936154326}
   - {fileID: 515877325}
@@ -1220,9 +1271,9 @@ MonoBehaviour:
   cloudPrefab: {fileID: 8371560900374259360, guid: d1292c0bee5be0d4a926012a92eef9aa, type: 3}
   minY: -4
   maxY: 4
-  baseSpawnRate: 15
-  minSpawnRate: 15
-  speedIncreasePerRound: 0.5
+  baseSpawnRate: 8
+  minSpawnRate: 6
+  speedIncreasePerRound: 0
 --- !u!4 &817088097
 Transform:
   m_ObjectHideFlags: 0
@@ -1472,9 +1523,9 @@ MonoBehaviour:
   airplanePrefab: {fileID: 5498831828232647639, guid: 5509a1127ebaf744a8c7be3702db4d54, type: 3}
   minY: -4
   maxY: 4
-  baseSpawnRate: 15
-  minSpawnRate: 3
-  speedIncreasePerRound: 0.8
+  baseSpawnRate: 2
+  minSpawnRate: 0.8
+  speedIncreasePerRound: 0.15
 --- !u!4 &936154326
 Transform:
   m_ObjectHideFlags: 0
@@ -1568,7 +1619,7 @@ MonoBehaviour:
   highScoreText: {fileID: 354567946}
   restartButton: {fileID: 1685338818}
   mainmenuButton: {fileID: 1852394049}
-  missilesToWin: 10
+  missilesToWin: 30
   scorePerMissile: 100
   maxRounds: 3
   nextLevelName: Game
@@ -2835,11 +2886,11 @@ MonoBehaviour:
   homingMissilePrefab: {fileID: 5750486056423510430, guid: a227fff5db7f81b4cb28bb647f296bf8, type: 3}
   minY: -4
   maxY: 4
-  homingChance: 20
-  maxRotationAngle: 10
-  baseSpawnRate: 15
-  minSpawnRate: 1.3
-  speedIncreasePerRound: 0.9
+  homingChance: 45
+  maxRotationAngle: 20
+  baseSpawnRate: 0.9
+  minSpawnRate: 0.2
+  speedIncreasePerRound: 0.1
 --- !u!4 &1629103731
 Transform:
   m_ObjectHideFlags: 0

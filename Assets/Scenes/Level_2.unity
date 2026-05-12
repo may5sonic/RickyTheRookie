@@ -1314,9 +1314,9 @@ MonoBehaviour:
   cloudPrefab: {fileID: 8371560900374259360, guid: d1292c0bee5be0d4a926012a92eef9aa, type: 3}
   minY: -4
   maxY: 4
-  baseSpawnRate: 15
-  minSpawnRate: 15
-  speedIncreasePerRound: 0.5
+  baseSpawnRate: 6.5
+  minSpawnRate: 5
+  speedIncreasePerRound: 0.25
 --- !u!4 &658949021
 Transform:
   m_ObjectHideFlags: 0
@@ -1824,7 +1824,7 @@ MonoBehaviour:
   - 35
   - 50
   timeText: {fileID: 510639299}
-  isBossLevel: 1
+  isBossLevel: 0
   bossPrefab: {fileID: 5498831828232647639, guid: e70fd3559a752a547bf8253ddfd68c0a, type: 3}
   scoreText: {fileID: 1189339068}
   missileText: {fileID: 1652341496}
@@ -1833,7 +1833,7 @@ MonoBehaviour:
   highScoreText: {fileID: 457025901}
   restartButton: {fileID: 1685338818}
   mainmenuButton: {fileID: 1852394049}
-  missilesToWin: 10
+  missilesToWin: 20
   scorePerMissile: 100
   maxRounds: 3
   nextLevelName: Level_3
@@ -2317,6 +2317,56 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1174259577}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1298132153
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1298132154}
+  - component: {fileID: 1298132155}
+  m_Layer: 0
+  m_Name: CoinSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1298132154
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1298132153}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1352.1267, y: -886.26196, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1457328115}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1298132155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1298132153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 271f4b20a4d42483584c32cfae400930, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Coin_Spawn
+  coinPrefab: {fileID: 8158892057143989510, guid: a9409234286864e8ab2734fb8883eb47, type: 3}
+  minY: -4
+  maxY: 4
+  baseSpawnRate: 5
+  minSpawnRate: 3.8
+  speedIncreasePerRound: 0.35
 --- !u!1 &1316764256
 GameObject:
   m_ObjectHideFlags: 0
@@ -2564,6 +2614,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1298132154}
   - {fileID: 658949021}
   - {fileID: 1807214573}
   - {fileID: 1742651481}
@@ -2740,11 +2791,11 @@ MonoBehaviour:
   homingMissilePrefab: {fileID: 5750486056423510430, guid: a227fff5db7f81b4cb28bb647f296bf8, type: 3}
   minY: -4
   maxY: 4
-  homingChance: 20
-  maxRotationAngle: 10
-  baseSpawnRate: 6
-  minSpawnRate: 1
-  speedIncreasePerRound: 0.7
+  homingChance: 35
+  maxRotationAngle: 18
+  baseSpawnRate: 1.4
+  minSpawnRate: 0.35
+  speedIncreasePerRound: 0.55
 --- !u!4 &1629103731
 Transform:
   m_ObjectHideFlags: 0
@@ -3332,9 +3383,9 @@ MonoBehaviour:
   cloudPrefab: {fileID: 4556868882300345297, guid: ee9403a7809ea1e499e53f4adfa32b9b, type: 3}
   minY: -4
   maxY: 4
-  baseSpawnRate: 5
-  minSpawnRate: 1.7
-  speedIncreasePerRound: 0.9
+  baseSpawnRate: 3.2
+  minSpawnRate: 1.8
+  speedIncreasePerRound: 0.3
 --- !u!4 &1742651481
 Transform:
   m_ObjectHideFlags: 0
@@ -3487,9 +3538,9 @@ MonoBehaviour:
   airplanePrefab: {fileID: 5498831828232647639, guid: 5509a1127ebaf744a8c7be3702db4d54, type: 3}
   minY: -4
   maxY: 4
-  baseSpawnRate: 10
-  minSpawnRate: 2.5
-  speedIncreasePerRound: 0.7
+  baseSpawnRate: 3
+  minSpawnRate: 1.2
+  speedIncreasePerRound: 0.8
 --- !u!4 &1807214573
 Transform:
   m_ObjectHideFlags: 0

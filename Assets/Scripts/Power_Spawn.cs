@@ -18,10 +18,25 @@ public class Powerup_Spawn : MonoBehaviour
     {
         // Start the repeating timer
         //InvokeRepeating(nameof(SpawnPowerup), 2f, spawnRate);
-        float currentSpawnRate = baseSpawnRate - (GameManager.currentRound * speedIncreasePerRound);
-        currentSpawnRate = Mathf.Max(currentSpawnRate, minSpawnRate);
-        Debug.Log("Round " + GameManager.currentRound + " | Powerup Spawn Rate: " + currentSpawnRate);
-        InvokeRepeating(nameof(SpawnPowerup), 1f, currentSpawnRate);
+        // float currentSpawnRate = baseSpawnRate - (GameManager.currentRound * speedIncreasePerRound);
+        // currentSpawnRate = Mathf.Max(currentSpawnRate, minSpawnRate);
+        // Debug.Log("Round " + GameManager.currentRound + " | Powerup Spawn Rate: " + currentSpawnRate);
+        // InvokeRepeating(nameof(SpawnPowerup), 1f, currentSpawnRate);
+
+        StartCoroutine(SpawnLoop()); // used to wait spawns dynamically
+    }
+
+    IEnumerator SpawnLoop() { // loop that can pause
+        while (true) {
+            if (GameManager.instance!= null && GameManager.instance.isGameActive) { // checks if active
+                SpawnPowerup();
+            }
+
+            float currentSpawnRate = baseSpawnRate - (GameManager.currentRound * speedIncreasePerRound) - (GameManager.instance.currentLevelNumber * 0.5f); // calculates current spawn
+            currentSpawnRate = Mathf.Max(currentSpawnRate, minSpawnRate); // clamp the spawn rate 
+            Debug.Log("Powerup Spawn Rate: " + currentSpawnRate); 
+            yield return new WaitForSeconds(currentSpawnRate); // controls powerup spawn pauses courotine
+        }
     }
 
     void SpawnPowerup() 

@@ -18,10 +18,24 @@ public class Airplane_Spawn : MonoBehaviour
     {
         // Start the repeating timer
         //InvokeRepeating(nameof(SpawnCloud), 2f, spawnRate);
-        float currentSpawnRate = baseSpawnRate - (GameManager.currentRound * speedIncreasePerRound);
-        currentSpawnRate = Mathf.Max(currentSpawnRate, minSpawnRate);
-        Debug.Log("Round " + GameManager.currentRound + " | Airplane Spawn Rate: " + currentSpawnRate);
-        InvokeRepeating(nameof(SpawnAirplane), 1f, currentSpawnRate);
+        // float currentSpawnRate = baseSpawnRate - (GameManager.currentRound * speedIncreasePerRound);
+        // currentSpawnRate = Mathf.Max(currentSpawnRate, minSpawnRate);
+        // Debug.Log("Round " + GameManager.currentRound + " | Airplane Spawn Rate: " + currentSpawnRate);
+        // InvokeRepeating(nameof(SpawnAirplane), 1f, currentSpawnRate);
+
+         StartCoroutine(SpawnLoop()); // used to wait spawns dynamically
+    }
+
+    IEnumerator SpawnLoop() {
+        while (true) {
+            if (GameManager.instance.isGameActive) {
+                SpawnAirplane();
+            }
+
+            float currentSpawnRate = baseSpawnRate - (GameManager.currentRound * speedIncreasePerRound); // calculates current spawn
+            currentSpawnRate = Mathf.Max(currentSpawnRate, minSpawnRate); // clamp the spawn rate 
+            yield return new WaitForSeconds(currentSpawnRate); // controls enemy plane spawn pauses courotine
+        }
     }
 
     void SpawnAirplane() 

@@ -18,10 +18,25 @@ public class Cloud_Spawn : MonoBehaviour
     {
         // Start the repeating timer
         //InvokeRepeating(nameof(SpawnCloud), 2f, spawnRate);
-        float currentSpawnRate = baseSpawnRate - (GameManager.currentRound * speedIncreasePerRound);
-        currentSpawnRate = Mathf.Max(currentSpawnRate, minSpawnRate);
-        Debug.Log("Round " + GameManager.currentRound + " | Cloud Spawn Rate: " + currentSpawnRate);
-        InvokeRepeating(nameof(SpawnCloud), 1f, currentSpawnRate);
+        // float currentSpawnRate = baseSpawnRate - (GameManager.currentRound * speedIncreasePerRound);
+        // currentSpawnRate = Mathf.Max(currentSpawnRate, minSpawnRate);
+        // Debug.Log("Round " + GameManager.currentRound + " | Cloud Spawn Rate: " + currentSpawnRate);
+        // InvokeRepeating(nameof(SpawnCloud), 1f, currentSpawnRate);
+
+        StartCoroutine(SpawnLoop()); // used to wait spawns dynamically
+    }
+
+    IEnumerator SpawnLoop() {
+        while (true) {
+            if (GameManager.instance != null && GameManager.instance.isGameActive) {
+                SpawnCloud();
+            }
+
+            float currentSpawnRate = baseSpawnRate - (GameManager.currentRound * speedIncreasePerRound); // calculates current spawn
+            currentSpawnRate = Mathf.Max(currentSpawnRate, minSpawnRate); // clamp the spawn rate 
+            Debug.Log("Cloud Spawn Rate: " + currentSpawnRate);
+            yield return new WaitForSeconds(currentSpawnRate); // controls cloud spawn pauses courotine
+        }
     }
 
     void SpawnCloud() 

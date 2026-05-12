@@ -28,11 +28,26 @@ public class missile_spawn : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //InvokeRepeating(nameof(SpawnMissile), 1f, spawnRate);
-        float currentSpawnRate = baseSpawnRate - (GameManager.currentRound * speedIncreasePerRound);
-        currentSpawnRate = Mathf.Max(currentSpawnRate, minSpawnRate);
-        Debug.Log("Round " + GameManager.currentRound + " | Missile Spawn Rate: " + currentSpawnRate);
-        InvokeRepeating(nameof(SpawnMissile), 1f, currentSpawnRate);
+
+        // //InvokeRepeating(nameof(SpawnMissile), 1f, spawnRate);
+        // float currentSpawnRate = baseSpawnRate - (GameManager.currentRound * speedIncreasePerRound);
+        // currentSpawnRate = Mathf.Max(currentSpawnRate, minSpawnRate);
+        // Debug.Log("Round " + GameManager.currentRound + " | Missile Spawn Rate: " + currentSpawnRate);
+        // InvokeRepeating(nameof(SpawnMissile), 1f, currentSpawnRate);
+
+         StartCoroutine(SpawnLoop()); // used to wait spawns dynamically
+    }
+
+    IEnumerator SpawnLoop() {
+        while (true) {
+            if (GameManager.instance.isGameActive) {
+                SpawnMissile();
+            }
+
+            float currentSpawnRate = baseSpawnRate - (GameManager.currentRound * speedIncreasePerRound) - (GameManager.instance.currentLevelNumber * 0.2f); // calculates current spawn
+            currentSpawnRate = Mathf.Max(currentSpawnRate, minSpawnRate); // clamp the spawn rate 
+            yield return new WaitForSeconds(currentSpawnRate); // controls missile spawn pauses courotine
+        }
     }
 
 
