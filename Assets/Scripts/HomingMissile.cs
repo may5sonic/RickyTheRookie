@@ -45,11 +45,11 @@ public class HomingMissile : MonoBehaviour
         if (playerObj != null)
         {
             player = playerObj.transform;
-            Debug.Log("RADAR LOCK: I found the player!");
+            //Debug.Log("RADAR LOCK: I found the player!");
         }
         else
         {
-            Debug.LogWarning("RADAR BROKEN: I can't find anything tagged 'Player'!");
+            //Debug.LogWarning("RADAR BROKEN: I can't find anything tagged 'Player'!");
         }
     }
 }
